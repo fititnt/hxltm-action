@@ -1,5 +1,17 @@
 # Container image that runs your code
-FROM alpine:3.10
+# FROM alpine:3.10
+# FROM python:3.9-alpine # libhxl ok, hdp-toolchain 8.8.8.4, nao
+# TODO: allow hdp-toolchain have less dependencies
+
+FROM python:3.9-bullseye
+
+# https://docs.github.com/en/actions/creating-actions/dockerfile-support-for-github-actions
+# It's recommended to use Docker images based on the Debian operating system.
+
+RUN pip install libhxl
+
+# FROM python:3.9-alpine --> Running setup.py install for cffi: finished with status 'error
+RUN pip install hdp-toolchain
 
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh

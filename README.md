@@ -1,13 +1,17 @@
 # hxltm-action
-[draft] GitHub Action for HXLM (Humanitarian Exchange Language Terminologium Multilinguam)
+**[non-production-ready] GitHub Action for HXLM (Humanitarian Exchange Language Terminologium Multilinguam)**
 
 <!--
+- https://github.com/nektos/act
 - https://github.com/actions/hello-world-docker-action
 - https://docs.github.com/en/actions/creating-actions/creating-a-docker-container-action
 - https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions
--->
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
+cp -r /workspace/git/fititnt/hxltm-action /home/fititnt/Downloads/hxltm-action-backup
+cd /home/fititnt/Downloads/hxltm-action-backup
+docker run --rm -it $(docker build -q .)
+
+-->
 
 ## Inputs
 
