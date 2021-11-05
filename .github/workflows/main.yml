@@ -1,12 +1,11 @@
 on: [push]
 
 jobs:
-  hello_world_job:
+  hxltm-testum:
     runs-on: ubuntu-latest
-    name: A job to say hello
+    name: hxltm-action ego testum
     steps:
-      # To use this repository's private action,
-      # you must check out the repository
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -30,6 +29,17 @@ jobs:
 
       - name: hello resultatum
         run: echo "hello ${{ steps.hello.outputs.resultatum }}"
+
+      - name: hxltmcli hxltm-exemplum-linguam.tm.hxl.csv hxltm-exemplum-linguam.tbx
+        id: hello
+        uses: ./
+        with:
+          bin: "hxltmcli"
+          infile: ".github/hxltm/hxltm-exemplum-linguam.tm.hxl.csv"
+          outfile: "objectivum.tbx"
+
+      - run: cat objectivum.tbx
+        continue-on-error: true
 
       - name: disable workflow commands
         run: |

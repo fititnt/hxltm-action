@@ -1,11 +1,13 @@
 # hxltm-action
-**[non-production-ready] GitHub Action for HXLM (Humanitarian Exchange Language Terminologium Multilinguam)**
+**[non-production-ready] GitHub Action for [HXLM (Humanitarian Exchange Language Terminologium Multilinguam)](https://hdp.etica.ai/hxltm/archivum/).**
 
-While this GitHub action can be used for the fantastic command line tools
-shipped with libhxl-python (because is a dependency of hxltm, and, anyway,
-you may need to do advanced preprocessing) the documented features here target
-the HXLTM, which is a documented specialization of HXL attributes to deal
-with import/export linguistic content for other data formats.
+While this GitHub action can be used for the
+[fantastic command line tools shipped with libhxl-python](https://github.com/HXLStandard/libhxl-python/wiki/HXL-cookbook)
+(because is a dependency of hxltm, and, anyway, you may need to do advanced
+preprocessing) the documented features here target the HXLTM, which is a
+documented specialization of HXL attributes to deal with import/export
+linguistic content for other data formats.
+
 <!--
 - https://github.com/nektos/act
 - https://github.com/actions/hello-world-docker-action
@@ -19,6 +21,7 @@ cd /home/fititnt/Downloads/hxltm-action-backup
 docker run --rm -it $(docker build -q .)
 
 docker run --rm -it $(docker build -q .) 'hxltmcli --help'
+docker run --rm -it $(docker build -q .) 'hxltmcli' '.github/hxltm/hxltm-exemplum-linguam.tm.hxl.csv' 'objectivum.tbx'
 
 # Using act
 act
@@ -27,65 +30,89 @@ act
 
 ## Inputs
 ### `bin`
-The executable to run.
+**Required** The executable to run.
 
-Examples:
-- hxltmcli
-- hxltmdexml
+**Parameter examples**:
+- `hxltmcli`
+- `hxltmdexml`
 
 ### `infile`
-The input file for the bin command
+The input file for the program defined by [bin](#bin) parameter.
+Default `"fontem.ext"`.
 
-Note: piping from stdin and stout, available as an efficient way by underlining cli tools, is not available. If you're working with gigabytes size datasets that would exist on GitHub Actions free disk, consider using actions-python and install all dependencies manually.
-
-Examples:
-- fontem.hxl.csv
-- fontem.tbx
+**Parameter examples**:
+- `fontem.hxl.csv`
+- `fontem.tbx`
 
 ### `outfile`
-The output file for the bin command
+The output file for the program defined by [bin](#bin) parameter.
+Default `"objectivum.ext"`.
 
-Note: piping from stdin and stout, available as an efficient way by underlining cli tools, is not available. If you're working with gigabytes size datasets that would exist on GitHub Actions free disk, consider using actions-python and install all dependencies manually.
+**Parameter examples**:
+- `objectivum.tbx`
+- `objecricum.hxl.csv`
 
-Examples:
-- objectivum.tbx
-- objecricum.hxl.csv
+> **Note**: piping from stdin and stout, available as an efficient way by
+underlining cli tools, is not available. If you're working with gigabytes
+size datasets that would exist on GitHub Actions free disk, consider
+using actions-python and install all dependencies manually.
+
+### `args`
+The output file for the program defined by [bin](#bin) parameter.
+Default `"objectivum.ext"`.
+
+**Parameter examples**:
+- `--help`
+- `-v`
+- `--sheet 7` (_Select sheet from a Excel workbook (1 is first sheet)_)
 
 ### `help`
-A syntax sugar to evoke `bin` binary with --help and exit without raising error.
+A syntax sugar to evoke [bin](#bin) program with --help and exit without
+raising error. Default `false`.
+
+**Parameter examples**:
+- `true`
+- `false`
 
 ### `verbose`
-A syntax sugar to evoke `bin` binary with -v.
+A syntax sugar to evoke [bin](#bin) program binary with -v. Default `false`.
 
-### `hxltm-asa-archivum`
-A syntax sugar to evoke `bin` binary with `--hxltm-asa-archivum`.
+**Parameter examples**:
+- `true`
+- `false`
 
-Examples:
-- .asa.hxltm.yml
-- .asa.hxltm.json
+### `--expertum-HXLTM-ASA`
+A syntax sugar to evoke `bin` binary with `--expertum-HXLTM-ASA {parameter}`.
 
-## `crudum-non-securum`
-
-Low level raw command to pass to dockerized container.
-
-Equivalent to GitHub Actions `run`. So, please follow
-[Security hardening for GitHub Actions](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions) by not using use as part of this command
-variables that are prone to script injection attack.
+**Examples**:
+- `.asa.hxltm.yml`
+- `.asa.hxltm.json`
 
 ## Outputs
 
-## `time`
+## `resultatum`
 
-The time we greeted you.
+resultatum variable
 
 ## Example usage
 
 ```yaml
-- uses: actions/hxltm-action@v0.1.0
-  with:
-    bin: 'hxltmcli'
-    infile: 'fontem.hxl.csv'
-    outfile: 'objectivum.tbx'
+on: [push]
+
+jobs:
+  HXLTM-2-TBX:
+    name: Converts HXLTM to TermBase eXchange (TBX)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # - uses: actions/hxltm-action@v0.1.0
+      - uses: fititnt/hxltm-action@main
+        with:
+            bin: 'hxltmcli'
+            infile: 'fontem.hxl.csv'
+            outfile: 'objectivum.tbx'
 ```
 
 ## License

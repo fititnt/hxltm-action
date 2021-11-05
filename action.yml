@@ -1,23 +1,32 @@
 # SPDX-License-Identifier: Unlicense OR 0BSD
-name: 'hxltm-action'
-description: 'GitHub Action for HXLM (Humanitarian Exchange Language Terminologium Multilinguam)'
+name: "hxltm-action"
+description: "GitHub Action for HXLM (Humanitarian Exchange Language Terminologium Multilinguam)"
 inputs:
-  # who-to-greet:  # id of input
-  #   description: 'Who to greet'
-  #   required: false
-  #   default: 'World'
-  crudum-non-securum:
-    description: 'Low level raw command to pass to dockerized container.'
+  bin:
+    description: "The executable to run."
+    required: true
+  infile:
+    description: "The input file for the program defined by bin parameter"
     required: false
-    default: 'vacuum'
+    default: "fontem.ext"
+  outfile:
+    description: "The input file for the program defined by bin parameter"
+    required: false
+    default: "objectivum.ext"
+
+  # crudum-non-securum:
+  #   description: "Low level raw command to pass to dockerized container."
+  #   required: false
+  #   default: "vacuum"
 outputs:
   # time: # id of output
   #   description: 'The time we greeted you'
   resultatum:
-    description: 'stdout of commmand'
+    description: "stdout of commmand"
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
+  using: "docker"
+  image: "Dockerfile"
   args:
-    # - ${{ inputs.who-to-greet }}
-    - ${{ inputs.crudum-non-securum }}
+    - ${{ inputs.bin }}
+    - ${{ inputs.infile }}
+    - ${{ inputs.outfile }}
