@@ -14,6 +14,8 @@ RUN pip install libhxl
 # FROM python:3.9-alpine --> Running setup.py install for cffi: finished with status 'error
 RUN pip install hdp-toolchain
 
+# TODO: https://stackoverflow.com/questions/43654656/dockerfile-if-else-condition-with-external-arguments
+
 # Copies your code file from your action repository to the filesystem path `/` of the container
 COPY entrypoint.sh /entrypoint.sh
 

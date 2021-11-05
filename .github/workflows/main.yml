@@ -9,11 +9,35 @@ jobs:
       # you must check out the repository
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Hello world action step
-        uses: ./ # Uses an action in the root directory
+
+      # - name: Hello world action step
+      #   uses: ./ # Uses an action in the root directory
+      #   id: hello
+      #   with:
+      #     who-to-greet: "Mona the Octocat"
+      # # Use the output from the `hello` step
+      # - name: Get the output time
+      #   run: echo "The time was ${{ steps.hello.outputs.time }}"
+
+      # - run: "hxltmcli --help"
+      #   continue-on-error: true
+
+      - name: hxltmcli --help
         id: hello
+        uses: ./
         with:
-          who-to-greet: "Mona the Octocat"
-      # Use the output from the `hello` step
-      - name: Get the output time
-        run: echo "The time was ${{ steps.hello.outputs.time }}"
+          crudum-non-securum: "hxltmcli --help"
+
+      - name: hello resultatum
+        run: echo "hello ${{ steps.hello.outputs.resultatum }}"
+
+      - name: disable workflow commands
+        run: |
+          echo '::warning:: this is a warning'
+          echo "::stop-commands::`echo -n ${{ github.token }} | sha256sum | head -c 64`"
+          echo '::warning:: this will NOT be a warning'
+          echo "::`echo -n ${{ github.token }} | sha256sum | head -c 64`::"
+          echo '::warning:: this is a warning again'
+
+      # - run: "hxlselect --help"
+      #   continue-on-error: true
