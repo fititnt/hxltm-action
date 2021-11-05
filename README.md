@@ -8,8 +8,13 @@
 - https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions
 
 cp -r /workspace/git/fititnt/hxltm-action /home/fititnt/Downloads/hxltm-action-backup
+
+rsync -r -v --dry-run /workspace/git/fititnt/hxltm-action/ /home/fititnt/Downloads/hxltm-action-backup
+rsync -r -v /workspace/git/fititnt/hxltm-action/ /home/fititnt/Downloads/hxltm-action-backup
 cd /home/fititnt/Downloads/hxltm-action-backup
 docker run --rm -it $(docker build -q .)
+
+docker run --rm -it $(docker build -q .) vacuum 'hxltmcli --help'
 
 -->
 
@@ -18,6 +23,14 @@ docker run --rm -it $(docker build -q .)
 ## `who-to-greet`
 
 **Required** The name of the person to greet. Default `"World"`.
+
+## `crudum-non-securum`
+
+Low level raw command to pass to dockerized container.
+
+Equivalent to GitHub Actions `run`. So, please follow
+[Security hardening for GitHub Actions](https://docs.github.com/en/actions/security-guides/security-hardening-for-github-actions) by not using use as part of this command
+variables that are prone to script injection attack.
 
 ## Outputs
 

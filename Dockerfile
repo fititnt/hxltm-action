@@ -1,4 +1,5 @@
-# Container image that runs your code
+# SPDX-License-Identifier: Unlicense OR 0BSD
+
 # FROM alpine:3.10
 # FROM python:3.9-alpine # libhxl ok, hdp-toolchain 8.8.8.4, nao
 # TODO: allow hdp-toolchain have less dependencies
