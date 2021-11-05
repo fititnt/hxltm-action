@@ -27,27 +27,52 @@ jobs:
       #   with:
       #     crudum-non-securum: "hxltmcli --help"
 
-      - name: hxltmcli hxltm-exemplum-linguam.tm.hxl.csv hxltm-exemplum-linguam.tbx
+      # - run: sudo apt-get update && sudo apt-get install tree -y
+      #   continue-on-error: true
+
+      # - run: tree -a
+      #   continue-on-error: true
+
+      # - run: ls .github/hxltm/
+      #   continue-on-error: true
+
+      # - run: ls ./
+      #   continue-on-error: true
+
+      - run: ls -lha ./
+        continue-on-error: true
+
+      - run: ls -lha ./tests/
+        continue-on-error: true
+
+      - run: ls -lha ./tests/result/
+        continue-on-error: true
+
+      - name: hxltmcli --objectivum-TBX-Basim hxltm-exemplum-linguam.tm.hxl.csv hxltm-exemplum-linguam.tbx
         id: exemplum_1
         uses: ./
         with:
           bin: "hxltmcli"
-          infile: ".github/hxltm/hxltm-exemplum-linguam.tm.hxl.csv"
-          outfile: "objectivum.tbx"
+          args: "--objectivum-TBX-Basim"
+          infile: "tests/hxltm-exemplum-linguam.tm.hxl.csv"
+          outfile: "tests/result/objectivum.tbx"
 
       - name: hello rexemplum_1esultatum
         run: echo "hello ${{ steps.exemplum_1.outputs.resultatum }}"
 
-      - run: cat objectivum.tbx
+      - run: ls -lha ./tests/result/
         continue-on-error: true
 
-      - name: disable workflow commands
-        run: |
-          echo '::warning:: this is a warning'
-          echo "::stop-commands::`echo -n ${{ github.token }} | sha256sum | head -c 64`"
-          echo '::warning:: this will NOT be a warning'
-          echo "::`echo -n ${{ github.token }} | sha256sum | head -c 64`::"
-          echo '::warning:: this is a warning again'
+      - run: cat tests/result/objectivum.tbx
+        continue-on-error: true
+
+      # - name: disable workflow commands
+      #   run: |
+      #     echo '::warning:: this is a warning'
+      #     echo "::stop-commands::`echo -n ${{ github.token }} | sha256sum | head -c 64`"
+      #     echo '::warning:: this will NOT be a warning'
+      #     echo "::`echo -n ${{ github.token }} | sha256sum | head -c 64`::"
+      #     echo '::warning:: this is a warning again'
 
       # - run: "hxlselect --help"
       #   continue-on-error: true

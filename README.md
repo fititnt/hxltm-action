@@ -32,7 +32,11 @@ cd /home/fititnt/Downloads/hxltm-action-backup
 docker run --rm -it $(docker build -q .)
 
 docker run --rm -it $(docker build -q .) 'hxltmcli --help'
-docker run --rm -it $(docker build -q .) 'hxltmcli' '.github/hxltm/hxltm-exemplum-linguam.tm.hxl.csv' 'objectivum.tbx'
+
+cp .github/hxltm/hxltm-exemplum-linguam.tm.hxl.csv hxltm-exemplum-linguam.tm.hxl.csv
+
+docker run --rm -it $(docker build -q .) 'hxltmcli' '.github/hxltm/hxltm-exemplum-linguam.tm.hxl.csv' 'objectivum.tbx' '--objectivum-TBX-Basim'
+docker run --rm -it $(docker build -q .) 'hxltmcli' 'tests/hxltm-exemplum-linguam.tm.hxl.csv' 'tests/result/objectivum.tbx' '--objectivum-TBX-Basim'
 
 # Using act
 act

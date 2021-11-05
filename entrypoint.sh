@@ -6,10 +6,15 @@
 echo "param 1 $1"
 echo "param 2 $2"
 echo "param 3 $3"
+echo "param 4 $4"
+echo "param @ $*"
+echo "GITHUB_WORKSPACE $GITHUB_WORKSPACE"
+echo "WORKDIR $WORKDIR"
 
 hxltm_action_bin="$1"
 hxltm_action_infile="${2:-fontem.ext}"
 hxltm_action_outfile="${3:-objectivum.ext}"
+hxltm_action_args="$4"
 
 if echo "$hxltm_action_bin" | grep -q "hxl"
 then
@@ -20,9 +25,13 @@ else
     exit 1
 fi
 
-hxltm_action_cmd="$hxltm_action_bin $hxltm_action_infile $hxltm_action_outfile"
+hxltm_action_cmd="$hxltm_action_bin $hxltm_action_args $hxltm_action_infile $hxltm_action_outfile"
 
 echo "hxltm_action_cmd [$hxltm_action_cmd]"
+
+ls -lha
+
+ls -lha "$hxltm_action_infile"
 
 echo "::group::resultatum"
 resultatum="$($hxltm_action_cmd)"

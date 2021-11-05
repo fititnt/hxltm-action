@@ -5,10 +5,6 @@ inputs:
   bin:
     description: "The executable to run."
     required: true
-  args:
-    description: "The input file for the program defined by bin parameter"
-    required: false
-    default: "fontem.ext"
   infile:
     description: "The input file for the program defined by bin parameter"
     required: false
@@ -17,6 +13,10 @@ inputs:
     description: "The input file for the program defined by bin parameter"
     required: false
     default: "objectivum.ext"
+  args:
+    description: "Arguments passed for the program defined by bin parameter."
+    required: false
+    # default: "fontem.ext"
 
   # crudum-non-securum:
   #   description: "Low level raw command to pass to dockerized container."
@@ -34,3 +34,4 @@ runs:
     - ${{ inputs.bin }}
     - ${{ inputs.infile }}
     - ${{ inputs.outfile }}
+    - ${{ inputs.args }}
