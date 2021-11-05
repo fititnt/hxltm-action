@@ -5,6 +5,10 @@ inputs:
   bin:
     description: "The executable to run."
     required: true
+  args:
+    description: "The input file for the program defined by bin parameter"
+    required: false
+    default: "fontem.ext"
   infile:
     description: "The input file for the program defined by bin parameter"
     required: false
