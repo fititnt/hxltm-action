@@ -1,10 +1,14 @@
 # hxltm-action
-**[non-production-ready] GitHub Action for [HXLM (Humanitarian Exchange Language Terminologium Multilinguam)](https://hdp.etica.ai/hxltm/archivum/). Both for push/pull request-like operations and [automated schedule (e.g. cron)](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#schedule) using remote sources (like Google Sheets edited by humans)**
+**[non-production-ready] GitHub Action for
+[HXLM (Multilingual Terminology in Humanitarian Language Exchange)](https://hdp.etica.ai/hxltm/).
+Both for push/pull request-like operations and
+[automated schedule (e.g. cron)](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#schedule)
+using remote sources (like Google Sheets edited by humans)**
 
 While this GitHub action can be used for the
-[fantastic command line tools shipped with libhxl-python](https://github.com/HXLStandard/libhxl-python/wiki/HXL-cookbook)
+[**fantastic** command line tools shipped with libhxl-python](https://github.com/HXLStandard/libhxl-python/wiki/HXL-cookbook)
 (because is a dependency of hxltm, and, anyway, you may need to do advanced
-preprocessing) the documented features here target the HXLTM, which is a
+preprocessing!) the documented features here target the HXLTM, which is a
 documented specialization of HXL attributes to deal with import/export
 linguistic content for other data formats such as:
 

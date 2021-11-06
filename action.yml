@@ -1,6 +1,17 @@
 # SPDX-License-Identifier: Unlicense OR 0BSD
-name: "hxltm-action"
-description: "GitHub Action for HXLM (Humanitarian Exchange Language Terminologium Multilinguam)"
+name: "Actions for HXLTM - the Multilingual Terminology in HXL"
+description: |
+  GitHub Action for HXLTM (Multilingual Terminology in Humanitarian Language
+  Exchange). HXLTM allows store terminology and translation memory. This action
+  allow use HXLTM pivot standard to export and import(*):
+  TBX (TermBase eXchange), TMX (Translation Memory eXchange),
+  XLIFF (XML Localization Interchange File Format),
+  UTX (Universal Terminology eXchange),
+  XML (free user-configurable schemas),
+  CSV, XLSX (Microsoft Excel), and much more!
+branding:
+  icon: 'hash'
+  color: 'blue'
 inputs:
   bin:
     description: "The executable to run."
