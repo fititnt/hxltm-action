@@ -6,7 +6,8 @@ jobs:
     name: hxltm-action ego testum
     steps:
 
-      - name: Checkout
+      # @see https://github.com/actions/checkout
+      - name: Checkout the git repository to the actions temporary host runner
         uses: actions/checkout@v2
 
       # - name: Hello world action step
@@ -48,7 +49,7 @@ jobs:
       - run: ls -lha ./tests/result/
         continue-on-error: true
 
-      - name: hxltmcli --objectivum-TBX-Basim hxltm-exemplum-linguam.tm.hxl.csv hxltm-exemplum-linguam.tbx
+      - name: 'hxltmcli --objectivum-TBX-Basim tests/hxltm-exemplum-linguam.tm.hxl.csv tests/result/objectivum.tbx'
         id: exemplum_1
         uses: ./
         with:
@@ -57,7 +58,7 @@ jobs:
           infile: "tests/hxltm-exemplum-linguam.tm.hxl.csv"
           outfile: "tests/result/objectivum.tbx"
 
-      - name: hxltmcli --objectivum-TMX hxltm-exemplum-linguam.tm.hxl.csv hxltm-exemplum-linguam.tmx
+      - name: 'hxltmcli --objectivum-TMX tests/hxltm-exemplum-linguam.tm.hxl.csv tests/result/objectivum.tmx'
         id: exemplum_2
         continue-on-error: true
         uses: ./
@@ -67,8 +68,8 @@ jobs:
           infile: "tests/hxltm-exemplum-linguam.tm.hxl.csv"
           outfile: "tests/result/objectivum.tmx"
 
-      - name: hxltmcli --objectivum-UTX hxltm-exemplum-linguam.tm.hxl.csv hxltm-exemplum-linguam.utx
-        id: exemplum_2
+      - name: 'hxltmcli --objectivum-UTX tests/hxltm-exemplum-linguam.tm.hxl.csv tests/result/objectivum.utx'
+        id: exemplum_3
         continue-on-error: true
         uses: ./
         with:
@@ -77,11 +78,28 @@ jobs:
           infile: "tests/hxltm-exemplum-linguam.tm.hxl.csv"
           outfile: "tests/result/objectivum.utx"
 
+      - name: 'hxltmdexml --agendum-linguam por-Latn@pt tests/hxltm-exemplum-linguam.tbx tests/result/objectivum-de-tbx.tm.hxl.csv'
+        id: exemplum_4
+        continue-on-error: true
+        uses: ./
+        with:
+          bin: "hxltmdexml"
+          args: "--agendum-linguam por-Latn@pt"
+          infile: "tests/hxltm-exemplum-linguam.tm.hxl.csv"
+          outfile: "tests/result/objectivum-de-tbx.tm.hxl.csv"
+
       - name: hello rexemplum_1esultatum
         run: echo "hello ${{ steps.exemplum_1.outputs.resultatum }}"
 
       - run: ls -lha ./tests/result/
         continue-on-error: true
+
+      # @see https://github.com/actions/upload-artifact
+      - uses: actions/upload-artifact@v2
+        # continue-on-error: true
+        with:
+          name: objectivum
+          path: tests/result/
 
       - run: cat tests/result/objectivum.tbx
         continue-on-error: true

@@ -1,4 +1,4 @@
-# hxltm-action
+# Actions with HXLTM: terminology, translation & localization
 **[non-production-ready] GitHub Action for
 [HXLM (Multilingual Terminology in Humanitarian Language Exchange)](https://hdp.etica.ai/hxltm/).
 Both for push/pull request-like operations and
@@ -44,10 +44,67 @@ docker run --rm -it $(docker build -q .) 'hxltmcli' 'tests/hxltm-exemplum-lingua
 
 # Using act
 act
+act --privileged
 
 -->
 
+
+## Example usage
+
+> PROTIP: if you are new to [GitHub Actions](https://docs.github.com/en/actions)
+  consider each [published action with 💖 by with others](https://github.com/marketplace?type=actions)
+  (TL;DR the `- uses: actions/checkout@v2` part ) as **building blocks**
+  who run on (TL;DR the `runs-on: ubuntu-latest` part) 8GB (ubuntu/windows) to
+  14GB (macos) RAM virtual machines and are **100% free and unlimited** to
+  public open source projects (just don't do cryptocurrency mining or,
+  even in good intent, set up scheduled jobs too often to disrupt
+  external services, like Google Sheets, like Google Sheets).
+
+### Quickstart
+```yaml
+on: [push]
+
+jobs:
+  HXLTM-export:
+    name: Converts HXLTM to multilingual data formats
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout the git repository to the actions temporary host runner
+        uses: actions/checkout@v2
+
+      - name: "HXLTM to TBX (TermBase eXchange)"
+        uses: actions/hxltm-action@v0.2.0
+        with:
+            bin: 'hxltmcli'
+            # https://hdp.etica.ai/hxltm/archivum/#TBX-Basim
+            args: "--objectivum-TBX-Basim"
+            infile: 'fontem.tm.hxl.csv'
+            outfile: 'objectivum.tbx'
+
+      - name: "HXLTM to TMX (Translation Memory eXchange)"
+        uses: actions/hxltm-action@v0.2.0
+        with:
+            bin: 'hxltmcli'
+            args: "--objectivum-TMX"
+            infile: 'fontem.tm.hxl.csv'
+            outfile: 'objectivum.tbx'
+
+      - name: "HXLTM to UTX (Universal Terminology eXchange)"
+        uses: actions/hxltm-action@v0.2.0
+        with:
+            bin: 'hxltmcli'
+            args: "--objectivum-UTX"
+            infile: 'fontem.tm.hxl.csv'
+            outfile: 'objectivum.utx'
+```
+
+
 ## Documentation
+
+This documentation explains the [action.yml](action.yml) and
+[entrypoint.sh](entrypoint.sh) strategy to abstract the command line usage
+described at <https://hdp.etica.ai/hxltm/archivum/>.
 
 ### Inputs
 #### `bin`
@@ -138,27 +195,6 @@ Sames as [args](#args) with `--expertum-HXLTM-ASA-verbosum --expertum-HXLTM-ASA 
 ### `resultatum`
 
 resultatum variable
-
-## Example usage
-
-```yaml
-on: [push]
-
-jobs:
-  HXLTM-2-TBX:
-    name: Converts HXLTM to TermBase eXchange (TBX)
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      # - uses: actions/hxltm-action@v0.1.0
-      - uses: fititnt/hxltm-action@main
-        with:
-            bin: 'hxltmcli'
-            infile: 'fontem.hxl.csv'
-            outfile: 'objectivum.tbx'
-```
 
 ## License
 
