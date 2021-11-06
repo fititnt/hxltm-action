@@ -57,6 +57,26 @@ jobs:
           infile: "tests/hxltm-exemplum-linguam.tm.hxl.csv"
           outfile: "tests/result/objectivum.tbx"
 
+      - name: hxltmcli --objectivum-TMX hxltm-exemplum-linguam.tm.hxl.csv hxltm-exemplum-linguam.tmx
+        id: exemplum_2
+        continue-on-error: true
+        uses: ./
+        with:
+          bin: "hxltmcli"
+          args: "--objectivum-TMX"
+          infile: "tests/hxltm-exemplum-linguam.tm.hxl.csv"
+          outfile: "tests/result/objectivum.tmx"
+
+      - name: hxltmcli --objectivum-UTX hxltm-exemplum-linguam.tm.hxl.csv hxltm-exemplum-linguam.utx
+        id: exemplum_2
+        continue-on-error: true
+        uses: ./
+        with:
+          bin: "hxltmcli"
+          args: "--objectivum-TMX"
+          infile: "tests/hxltm-exemplum-linguam.tm.hxl.csv"
+          outfile: "tests/result/objectivum.utx"
+
       - name: hello rexemplum_1esultatum
         run: echo "hello ${{ steps.exemplum_1.outputs.resultatum }}"
 
@@ -64,6 +84,12 @@ jobs:
         continue-on-error: true
 
       - run: cat tests/result/objectivum.tbx
+        continue-on-error: true
+
+      - run: cat tests/result/objectivum.tmx
+        continue-on-error: true
+
+      - run: cat tests/result/objectivum.utx
         continue-on-error: true
 
       # - name: disable workflow commands
