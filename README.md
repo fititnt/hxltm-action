@@ -1,27 +1,55 @@
 # Actions with HXLTM: terminology, translation & localization
-**[non-production-ready] GitHub Action for
-[HXLM (Multilingual Terminology in Humanitarian Language Exchange)](https://hdp.etica.ai/hxltm/).
-Both for push/pull request-like operations and
-[automated schedule (e.g. cron)](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#schedule)
-using remote sources (like Google Sheets edited by humans)**
+**[non-production-ready] GitHub Action for [HXLTM](https://hdp.etica.ai/hxltm/)
+(Multilingual Terminology in
+[Humanitarian Language Exchange](https://hxlstandard.org/)).
+TBX, TMX, XLIFF, UTX, XML, CSV, Excel XLSX, Google Sheets, and more.**
 
+> ## Preface
+> **What is HXLTM?**
+> 
+> The HXLTM documented convetions <sup>([ontologia](https://hdp.etica.ai/hxltm/#ontologia))</sup>
+explains how store terminology and translation memories in HXL. This make both
+very compact storage while viable to alow human colaborative editing for
+complex cases even without advanced frontends.
+>
+> **Referece tooling**
+>
+> Public domain reference tooling enable direct convertion from HXLTM to both
+templated files (in short: more-than-string-replace placeholders with content
+from HXLTM) and both user customizable and industry standards related to
+linguistic content.
+>
+> - [TBX (TermBase eXchange)](https://en.wikipedia.org/wiki/TermBase_eXchange)
+> - [TMX (Translation Memory eXchange)](https://en.wikipedia.org/wiki/Translation_Memory_eXchange)
+> - [XLIFF (XML Localization Interchange File Format)](https://en.wikipedia.org/wiki/Translation_Memory_eXchange)
+> - [UTX (Universal Terminology eXchange) <sup>export only</sup>](https://en.wikipedia.org/wiki/Universal_Terminology_eXchange)
+> - [HXLTM](https://hdp.etica.ai/hxltm/archivum/) itself, on some container,
+>   either on local disk or remove server:
+>   - CSV
+>   - Google Sheets <sup>read only</sup>
+>   - Microsoft Excel <sup>read only</sup>
+> - ...and much, much more. See <https://hdp.etica.ai/hxltm/archivum/>
+>
+>
+> **The HXLTM Action**
+> 
+> This GitHub Action abstract part of what is possible use with underling
+> HXLTM cli tools. This action also allow use the
+> [**fantastic** command line tools shipped with libhxl-python](https://github.com/HXLStandard/libhxl-python/wiki/HXL-cookbook) configurable with the [bin](#bin) parameter.
+>
+> Source code for underlining applications:
+> - HXL Standard tools: https://github.com/HXLStandard/libhxl-python
+> - HXLTM cli tools: https://github.com/EticaAI/HXL-Data-Science-file-formats
+
+
+<!--
 While this GitHub action can be used for the
 [**fantastic** command line tools shipped with libhxl-python](https://github.com/HXLStandard/libhxl-python/wiki/HXL-cookbook)
 (because is a dependency of hxltm, and, anyway, you may need to do advanced
 preprocessing!) the documented features here target the HXLTM, which is a
 documented specialization of HXL attributes to deal with import/export
 linguistic content for other data formats such as:
-
-- [TBX (TermBase eXchange)](https://en.wikipedia.org/wiki/TermBase_eXchange)
-- [TMX (Translation Memory eXchange)](https://en.wikipedia.org/wiki/Translation_Memory_eXchange)
-- [XLIFF (XML Localization Interchange File Format)](https://en.wikipedia.org/wiki/Translation_Memory_eXchange)
-- [UTX (Universal Terminology eXchange) <sup>export only</sup>](https://en.wikipedia.org/wiki/Universal_Terminology_eXchange)
-- [HXLTM](https://hdp.etica.ai/hxltm/archivum/) itself, on some container,
-  either on local disk or remove server:
-  - CSV
-  - Google Sheets <sup>read only</sup>
-  - Microsoft Excel <sup>read only</sup>
-- ...and much, much more. See <https://hdp.etica.ai/hxltm/archivum/>
+-->
 
 <!--
 - https://github.com/nektos/act
@@ -51,14 +79,30 @@ act --privileged
 
 ## Example usage
 
+> _PROTIP: if you are new to [GitHub Actions](https://docs.github.com/en/actions)
+  consider each [published action with 💖 by with others](https://github.com/marketplace?type=actions)
+  (TL;DR the `- uses:` of `- uses: actions/checkout@v2` part) as **building blocks**
+  who run (TL;DR the `runs-on: ubuntu-latest` part) on 8GB to 14GB RAM
+  powerful virtual machines and are **100% free and unlimited (*)** to public
+  open source projects._
+>
+> <sub>(*): but even in good intent, **avoid too often** unauthenticated request
+> for external services without strong reason, like Google Sheets.
+> Special care with
+> [Scheduled jobs](https://docs.github.com/en/actions/learn-github-actions/events-that-trigger-workflows#scheduled-events)
+> for datasets someone else already is sharing a cached version and hosting
+> on GitHub Pages or some other site.</sub>
+
+<!--
 > PROTIP: if you are new to [GitHub Actions](https://docs.github.com/en/actions)
   consider each [published action with 💖 by with others](https://github.com/marketplace?type=actions)
   (TL;DR the `- uses: actions/checkout@v2` part ) as **building blocks**
   who run on (TL;DR the `runs-on: ubuntu-latest` part) 8GB (ubuntu/windows) to
   14GB (macos) RAM virtual machines and are **100% free and unlimited** to
-  public open source projects (just don't do cryptocurrency mining or,
-  even in good intent, set up scheduled jobs too often to disrupt
-  external services, like Google Sheets, like Google Sheets).
+  public open source projects (just don't, even in good intent,
+  set up unnecessary scheduled jobs too often to disrupt external services,
+  like Google Sheets).
+-->
 
 ### Quickstart
 ```yaml

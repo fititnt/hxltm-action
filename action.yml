@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Unlicense OR 0BSD
-name: "Actions with HXLTM: terminology, translation & localization"
+name: "Actions with HXLTM - terminology, translation & localization"
 # Market place category: Localization, Publishing
 description: |
   Multilingual Terminology in Humanitarian Language Exchange.
@@ -16,8 +16,8 @@ description: |
 #   XML (free user-configurable schemas),
 #   CSV, XLSX (Microsoft Excel), and much more!
 branding:
-  icon: 'hash'
-  color: 'blue'
+  icon: 'book-open'
+  color: 'red'
 inputs:
   bin:
     description: "The executable to run."

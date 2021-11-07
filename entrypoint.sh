@@ -10,6 +10,7 @@ echo "param 4 $4"
 echo "param @ $*"
 echo "GITHUB_WORKSPACE $GITHUB_WORKSPACE"
 echo "WORKDIR $WORKDIR"
+cat /etc/*release
 
 hxltm_action_bin="$1"
 hxltm_action_infile="${2:-fontem.ext}"

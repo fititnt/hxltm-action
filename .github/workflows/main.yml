@@ -74,7 +74,7 @@ jobs:
         uses: ./
         with:
           bin: "hxltmcli"
-          args: "--objectivum-TMX"
+          args: "--objectivum-UTX"
           infile: "tests/hxltm-exemplum-linguam.tm.hxl.csv"
           outfile: "tests/result/objectivum.utx"
 

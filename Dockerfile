@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: Unlicense OR 0BSD
 
 # FROM alpine:3.10
-# FROM python:3.9-alpine # libhxl ok, hdp-toolchain 8.8.8.4, nao
+FROM python:3.9-alpine
 # TODO: allow hdp-toolchain have less dependencies
 
-FROM python:3.9-bullseye
+# FROM python:3.9-bullseye
 
 # https://docs.github.com/en/actions/creating-actions/dockerfile-support-for-github-actions
 # It's recommended to use Docker images based on the Debian operating system.
