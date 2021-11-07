@@ -1,5 +1,25 @@
 #!/bin/sh -l
-# SPDX-License-Identifier: Unlicense OR 0BSD
+# ==============================================================================
+#
+#          FILE:  entrypoint.sh
+#
+#         USAGE:  ---
+#
+#   DESCRIPTION:  ---
+#
+#       OPTIONS:  ---
+#
+#  REQUIREMENTS:  ---
+#          BUGS:  ---
+#         NOTES:  ---
+#       AUTHORS:  Emerson Rocha <rocha[at]ieee.org>
+# COLLABORATORS:  <@TODO: put additional non-anonymous names here>
+#       COMPANY:  EticaAI
+#       LICENSE:  Public Domain dedication OR Zero-Clause BSD
+#                 SPDX-License-Identifier: Unlicense OR 0BSD
+#       VERSION:  v1.0
+#       CREATED:  2021-11-04 11:27 UTC started
+# ==============================================================================
 
 # @see https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions
 
@@ -12,6 +32,7 @@ echo "param @ $*"
 echo "GITHUB_WORKSPACE $GITHUB_WORKSPACE"
 echo "WORKDIR $WORKDIR"
 cat /etc/*release
+# printenv
 echo "::endgroup::"
 
 hxltm_action_bin="$1"

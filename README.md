@@ -73,6 +73,9 @@ docker run --rm -it $(docker build -q .) 'hxltmcli' 'tests/hxltm-exemplum-lingua
 act
 act --privileged
 
+# Issues
+#  - https://github.com/nektos/act/issues/555
+#    - https://github.com/nektos/act/issues/410#issuecomment-732096442
 -->
 
 
@@ -210,12 +213,15 @@ Arguments passed for the program defined by [bin](#bin) parameter.
 - `--sheet 7` (_Select sheet from a Excel workbook (1 is first sheet)_)
 
 #### Syntactic sugar arguments
-This section shows some [Syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar)
-(or _sntactic saccharins_) for what could be done using other ways, often
-with [args](#args) parameter. Some of these only use English for what hxltm cli
-tools use Latin.
+This section shows some [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar)
+(or intentional _syntactic saccharins_) for what could be done using other ways,
+often with [args](#args) parameter. Some of these only use English for what
+hxltm cli tools use Latin.
 
 ##### `help`
+> _TODO: this option is drafted, but not fully implemented/tested for
+  production usage. Please use raw version [args](#args) parameter._
+
 A syntax sugar to evoke [bin](#bin) program with --help and exit without
 raising error. Default `false`.
 
@@ -224,6 +230,9 @@ raising error. Default `false`.
 - `false`
 
 ##### `verbose`
+> _TODO: this option is drafted, but not fully implemented/tested for
+  production usage. Please use raw version [args](#args) parameter._
+
 A syntax sugar to evoke [bin](#bin) program binary with -v. Default `false`.
 
 **Parameter examples**:
@@ -231,6 +240,9 @@ A syntax sugar to evoke [bin](#bin) program binary with -v. Default `false`.
 - `false`
 
 ##### `dump_abstract_syntax_tree`
+> _TODO: this option is drafted, but not fully implemented/tested for
+  production usage. Please use raw version [args](#args) parameter._
+
 Specify a file to dump the HXLTM
 [abstract syntax tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree).
 
@@ -241,6 +253,9 @@ Sames as [args](#args) with `--expertum-HXLTM-ASA {parameter}`.
 - `.asa.hxltm.json`
 
 ##### `dump_abstract_syntax_tree_verbose`
+> _TODO: this option is drafted, but not fully implemented/tested for
+  production usage. Please use raw version [args](#args) parameter._
+
 Specify a file to dump the HXLTM
 [abstract syntax tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
 with VERY verbose mode.

@@ -9,6 +9,24 @@ jobs:
       # @see https://github.com/actions/checkout
       - name: Checkout the git repository to the actions temporary host runner
         uses: actions/checkout@v2
+        with:
+          path: main
+
+      #### Get additional test data and put on data/ ___________________________
+      - run: wget https://github.com/fititnt/hxltm-action-example/archive/refs/heads/main.zip
+      - run: unzip main.zip
+      - run: cp -r hxltm-action-example-main/data/ data/
+      - run: find data/
+
+      #### Quick general tests _________________________________________________
+      - name: "hxltmcli --objectivum-TBX-Basim data/exemplum/hxltm-exemplum-linguam.tm.hxl.csv data/exemplum/resultatum/de-hxltm/hxltm-exemplum-linguam.tbx"
+        uses: ./
+        # continue-on-error: true
+        with:
+          bin: "hxltmcli"
+          args: "--objectivum-TBX-Basim"
+          infile: data/exemplum/hxltm-exemplum-linguam.tm.hxl.csv
+          outfile: data/exemplum/resultatum/de-hxltm/hxltm-exemplum-linguam.tbx
 
       # - name: Hello world action step
       #   uses: ./ # Uses an action in the root directory
@@ -48,6 +66,9 @@ jobs:
 
       # - run: ls -lha ./tests/result/
       #   continue-on-error: true
+
+      #### Old tests (needs be removed) ________________________________________
+      # TODO: delete the tests/ folder and use files from remote repository
 
       - name: 'hxltmcli --objectivum-TBX-Basim tests/hxltm-exemplum-linguam.tm.hxl.csv tests/result/objectivum.tbx'
         id: exemplum_1
@@ -91,24 +112,40 @@ jobs:
       - name: hello rexemplum_1esultatum
         run: echo "hello ${{ steps.exemplum_1.outputs.resultatum }}"
 
-      - run: ls -lha ./tests/result/
+      - run: find ./tests/result/
         continue-on-error: true
 
+      - run: find data/
+        continue-on-error: true
+
+        #### Upload artifacts for inspection ___________________________________
       # @see https://github.com/actions/upload-artifact
       - uses: actions/upload-artifact@v2
         # continue-on-error: true
+        # https://github.com/nektos/act#skipping-steps
+        if: ${{ !env.ACT }}
         with:
           name: objectivum
           path: tests/result/
 
-      - run: cat tests/result/objectivum.tbx
-        continue-on-error: true
+      #### Upload results ______________________________________________________
+      # @see https://github.com/actions/upload-artifact
+      - uses: actions/upload-artifact@v2
+        if: ${{ !env.ACT }}
+        # continue-on-error: true
+        with:
+          name: data
+          path: data/
+          retention-days: 5
 
-      - run: cat tests/result/objectivum.tmx
-        continue-on-error: true
+      # - run: cat tests/result/objectivum.tbx
+      #   continue-on-error: true
 
-      - run: cat tests/result/objectivum.utx
-        continue-on-error: true
+      # - run: cat tests/result/objectivum.tmx
+      #   continue-on-error: true
+
+      # - run: cat tests/result/objectivum.utx
+      #   continue-on-error: true
 
       # - name: disable workflow commands
       #   run: |
