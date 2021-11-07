@@ -5,6 +5,9 @@
 TBX, TMX, XLIFF, UTX, XML, CSV, Excel XLSX, Google Sheets, and more.**
 
 > ## Preface
+> Click to see more context details.
+> <details><summary>What is HXLTM? Referece tooling? The HXLTM Action?</summary>
+>
 > **What is HXLTM?**
 > 
 > The HXLTM documented convetions <sup>([ontologia](https://hdp.etica.ai/hxltm/#ontologia))</sup>
@@ -40,7 +43,7 @@ linguistic content.
 > Source code for underlining applications:
 > - HXL Standard tools: https://github.com/HXLStandard/libhxl-python
 > - HXLTM cli tools: https://github.com/EticaAI/HXL-Data-Science-file-formats
-
+> </details>
 
 <!--
 While this GitHub action can be used for the
@@ -73,6 +76,7 @@ docker run --rm -it $(docker build -q .) 'hxltmcli' 'tests/hxltm-exemplum-lingua
 act
 act --privileged
 
+#
 # Issues
 #  - https://github.com/nektos/act/issues/555
 #    - https://github.com/nektos/act/issues/410#issuecomment-732096442
@@ -80,6 +84,8 @@ act --privileged
 
 
 ## Example usage
+
+<details><summary>Are you new to GitHub Actions? PROTIP!</summary>
 
 > _PROTIP: if you are new to [GitHub Actions](https://docs.github.com/en/actions)
   consider each [published action with 💖 by with others](https://github.com/marketplace?type=actions)
@@ -95,16 +101,7 @@ act --privileged
 > for datasets someone else already is sharing a cached version and hosting
 > on GitHub Pages or some other site.</sub>
 
-<!--
-> PROTIP: if you are new to [GitHub Actions](https://docs.github.com/en/actions)
-  consider each [published action with 💖 by with others](https://github.com/marketplace?type=actions)
-  (TL;DR the `- uses: actions/checkout@v2` part ) as **building blocks**
-  who run on (TL;DR the `runs-on: ubuntu-latest` part) 8GB (ubuntu/windows) to
-  14GB (macos) RAM virtual machines and are **100% free and unlimited** to
-  public open source projects (just don't, even in good intent,
-  set up unnecessary scheduled jobs too often to disrupt external services,
-  like Google Sheets).
--->
+</details>
 
 ### Quickstart
 ```yaml
@@ -151,11 +148,9 @@ Examples of repositories using this action
 - <https://github.com/fititnt/hxltm-action-example>
   - <https://github.com/fititnt/hxltm-action-example/tree/main/.github/workflows>
 
-NOTICE: the `hxltm-action-example` is used to test the lasted version of
-`hxltm-action`.
-
-It's recommended to specify a version (or a strict hash), like `@v0.3.0` on
-`@main`, so `- uses: fititnt/hxltm-action@main` would become
+The `hxltm-action-example` is used to test the lasted version of `hxltm-action`.
+**It's recommended to specify a version (or a strict hash), like `@v0.3.0`
+instead of `@main`**, so `- uses: fititnt/hxltm-action@main` would become
 `- uses: fititnt/hxltm-action@v0.3.0`.
 
 ## Documentation
@@ -163,6 +158,18 @@ It's recommended to specify a version (or a strict hash), like `@v0.3.0` on
 This documentation explains the [action.yml](action.yml) and
 [entrypoint.sh](entrypoint.sh) strategy to abstract the command line usage
 described at <https://hdp.etica.ai/hxltm/archivum/>.
+
+---
+```yaml
+      - # name: "Some description here"
+        uses: fititnt/hxltm-action@v0.3.0
+        with:
+          bin: "hxltmcli" # hxltmcli, hxltmdexml
+          args: ""  # 
+          infile: path/to/fontem.tm.hxl.csv
+          outfile: path/to/objectivum
+```
+---
 
 ### Inputs
 #### `bin`
@@ -219,6 +226,76 @@ often with [args](#args) parameter. Some of these only use English for what
 hxltm cli tools use Latin.
 
 ##### `help`
+
+<s>A syntax sugar to evoke [bin](#bin) program with --help and exit without
+raising error. Default `false`.</s> Just copy and paste the following.
+
+```yaml
+      - name: "hxltmcli --help"
+        uses: fititnt/hxltm-action@v0.3.0
+        with:
+          bin: "hxltmcli"
+          args: "--help"
+
+      - name: "hxltmdexml --help"
+        uses: fititnt/hxltm-action@v0.3.0
+        with:
+          bin: "hxltmdexml"
+          args: "--help"
+```
+
+<details><summary>Extra: HXLStandard cli tools</summary>
+
+Since `libhxl-python` is a requeriment of hxltm, you can reuse this action to
+pre-process **already HXLated** datasets (if not HXLated yet, use `hxltag`
+and manually map.)
+
+```yaml
+      # Bonus: HXLStandard cli tools ___________________________________________
+      # @see https://github.com/HXLStandard/libhxl-python/wiki/Command-line-tools
+      - name: "hxlspec --help"
+        uses: fititnt/hxltm-action@v0.3.0
+        with:
+          bin: "hxlspec"
+          args: "--help"
+
+      - name: "hxltag --help"
+        uses: fititnt/hxltm-action@v0.3.0
+        with:
+          bin: "hxltag"
+          args: "--help"
+
+      - name: "hxldedup --help"
+        uses: fititnt/hxltm-action@v0.3.0
+        with:
+          bin: "hxldedup"
+          args: "--help"
+
+      ### Full list (as 2021-11-07)
+      # compgen -c | grep hxl
+      # hxlreplace
+      # hxlexplode
+      # hxlselect
+      # hxladd
+      # hxlspec
+      # hxlcount
+      # hxltag
+      # hxlcut
+      # hxlsort
+      # hxlexpand
+      # hxlmerge
+      # hxldedup
+      # hxlfill
+      # hxlrename
+      # hxlclean
+      # hxlappend
+      # hxlimplode
+      # hxlvalidate
+      # hxlhash
+```
+</details>
+
+<!--
 > _TODO: this option is drafted, but not fully implemented/tested for
   production usage. Please use raw version [args](#args) parameter._
 
@@ -228,6 +305,8 @@ raising error. Default `false`.
 **Parameter examples**:
 - `true`
 - `false`
+-->
+
 
 ##### `verbose`
 > _TODO: this option is drafted, but not fully implemented/tested for
@@ -270,7 +349,7 @@ Sames as [args](#args) with `--expertum-HXLTM-ASA-verbosum --expertum-HXLTM-ASA 
 
 ### `resultatum`
 
-resultatum variable
+> TODO: explain better the outputs.
 
 ## License
 

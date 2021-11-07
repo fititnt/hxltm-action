@@ -9,8 +9,21 @@ jobs:
       # @see https://github.com/actions/checkout
       - name: Checkout the git repository to the actions temporary host runner
         uses: actions/checkout@v2
+        # with:
+        #   path: main
+
+      #### bin --help __________________________________________________________
+      - name: "hxltmcli --help"
+        uses: ./
         with:
-          path: main
+          bin: "hxltmcli"
+          args: "--help"
+
+      - name: "hxltmdexml --help"
+        uses: ./
+        with:
+          bin: "hxltmdexml"
+          args: "--help"
 
       #### Get additional test data and put on data/ ___________________________
       - run: wget https://github.com/fititnt/hxltm-action-example/archive/refs/heads/main.zip
