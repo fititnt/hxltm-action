@@ -40,14 +40,14 @@ jobs:
       # - run: ls ./
       #   continue-on-error: true
 
-      - run: ls -lha ./
-        continue-on-error: true
+      # - run: ls -lha ./
+      #   continue-on-error: true
 
-      - run: ls -lha ./tests/
-        continue-on-error: true
+      # - run: ls -lha ./tests/
+      #   continue-on-error: true
 
-      - run: ls -lha ./tests/result/
-        continue-on-error: true
+      # - run: ls -lha ./tests/result/
+      #   continue-on-error: true
 
       - name: 'hxltmcli --objectivum-TBX-Basim tests/hxltm-exemplum-linguam.tm.hxl.csv tests/result/objectivum.tbx'
         id: exemplum_1

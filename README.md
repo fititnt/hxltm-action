@@ -67,8 +67,7 @@ docker run --rm -it $(docker build -q .) 'hxltmcli --help'
 
 cp .github/hxltm/hxltm-exemplum-linguam.tm.hxl.csv hxltm-exemplum-linguam.tm.hxl.csv
 
-docker run --rm -it $(docker build -q .) 'hxltmcli' '.github/hxltm/hxltm-exemplum-linguam.tm.hxl.csv' 'objectivum.tbx' '--objectivum-TBX-Basim'
-docker run --rm -it $(docker build -q .) 'hxltmcli' 'tests/hxltm-exemplum-linguam.tm.hxl.csv' 'tests/result/objectivum.tbx' '--objectivum-TBX-Basim'
+docker run --rm -it $(docker build -q .) 'hxltmcli' 'tests/hxltm-exemplum-linguam.tm.hxl.csv' 'objectivum.tbx' '--objectivum-TBX-Basim'
 
 # Using act
 act
@@ -118,7 +117,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: "HXLTM to TBX (TermBase eXchange)"
-        uses: actions/hxltm-action@v0.2.0
+        uses: actions/hxltm-action@v0.3.0
         with:
             bin: 'hxltmcli'
             # https://hdp.etica.ai/hxltm/archivum/#TBX-Basim
@@ -127,7 +126,7 @@ jobs:
             outfile: 'objectivum.tbx'
 
       - name: "HXLTM to TMX (Translation Memory eXchange)"
-        uses: actions/hxltm-action@v0.2.0
+        uses: actions/hxltm-action@v0.3.0
         with:
             bin: 'hxltmcli'
             args: "--objectivum-TMX"
@@ -135,14 +134,26 @@ jobs:
             outfile: 'objectivum.tbx'
 
       - name: "HXLTM to UTX (Universal Terminology eXchange)"
-        uses: actions/hxltm-action@v0.2.0
+        uses: actions/hxltm-action@v0.3.0
         with:
             bin: 'hxltmcli'
             args: "--objectivum-UTX"
             infile: 'fontem.tm.hxl.csv'
             outfile: 'objectivum.utx'
 ```
+### Full example usages
+Examples of repositories using this action
 
+#### hxltm-action-example
+- <https://github.com/fititnt/hxltm-action-example>
+  - <https://github.com/fititnt/hxltm-action-example/tree/main/.github/workflows>
+
+NOTICE: the `hxltm-action-example` is used to test the lasted version of
+`hxltm-action`.
+
+It's recommended to specify a version (or a strict hash), like `@v0.3.0` on
+`@main`, so `- uses: fititnt/hxltm-action@main` would become
+`- uses: fititnt/hxltm-action@v0.3.0`.
 
 ## Documentation
 
@@ -155,8 +166,14 @@ described at <https://hdp.etica.ai/hxltm/archivum/>.
 **Required** The executable to run.
 
 **Parameter examples**:
-- `hxltmcli`
-- `hxltmdexml`
+- `hxltmcli` _(or `.github/hxltm/hxltmcli.py`)_ (*)
+- `hxltmdexml` _(or `.github/hxltm/hxltmdexml.py`)_ (*)
+
+> <sub>(*): If necessary, a local customized fork of the reference HXLTM tools
+  can be stored near where the data is processed. The suggested places are
+  .github/hxltm/(file).py. This can both be useful for testing proposes or
+  immediate hotfixes under urgency response where you as implementer cannot
+  wait.</sub>
 
 #### `infile`
 The input file for the program defined by [bin](#bin) parameter.

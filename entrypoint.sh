@@ -3,6 +3,7 @@
 
 # @see https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions
 
+echo "::group::Debug parameters"
 echo "param 1 $1"
 echo "param 2 $2"
 echo "param 3 $3"
@@ -11,6 +12,7 @@ echo "param @ $*"
 echo "GITHUB_WORKSPACE $GITHUB_WORKSPACE"
 echo "WORKDIR $WORKDIR"
 cat /etc/*release
+echo "::endgroup::"
 
 hxltm_action_bin="$1"
 hxltm_action_infile="${2:-fontem.ext}"
@@ -28,15 +30,18 @@ fi
 
 hxltm_action_cmd="$hxltm_action_bin $hxltm_action_args $hxltm_action_infile $hxltm_action_outfile"
 
-echo "hxltm_action_cmd [$hxltm_action_cmd]"
-
-ls -lha
-
+echo "::group::source file"
 ls -lha "$hxltm_action_infile"
+echo "::endgroup::"
+
+echo "::group::hxltm_action_cmd"
+echo "$hxltm_action_cmd"
+echo "::endgroup::"
 
 echo "::group::resultatum"
 resultatum="$($hxltm_action_cmd)"
 echo "$resultatum"
+echo "::endgroup::"
 echo "::set-output name=resultatum::$resultatum"
 
 # echo "::endgroup::"
