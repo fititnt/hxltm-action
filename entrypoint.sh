@@ -31,7 +31,16 @@ echo "param 4 $4"
 echo "param @ $*"
 echo "GITHUB_WORKSPACE $GITHUB_WORKSPACE"
 echo "WORKDIR $WORKDIR"
-cat /etc/*release
+
+# shellcheck disable=SC2154
+echo "source_language $source_language"
+# shellcheck disable=SC2154
+echo "target_language $target_language"
+# shellcheck disable=SC2154
+echo "working_languages $working_languages"
+# shellcheck disable=SC2154
+echo "working_languages $auxiliary_languages"
+# cat /etc/*release
 # printenv
 echo "::endgroup::"
 
@@ -51,9 +60,9 @@ fi
 
 hxltm_action_cmd="$hxltm_action_bin $hxltm_action_args $hxltm_action_infile $hxltm_action_outfile"
 
-echo "::group::source file"
-ls -lha "$hxltm_action_infile"
-echo "::endgroup::"
+# echo "::group::source file"
+# ls -lha "$hxltm_action_infile"
+# echo "::endgroup::"
 
 echo "::group::hxltm_action_cmd"
 echo "$hxltm_action_cmd"

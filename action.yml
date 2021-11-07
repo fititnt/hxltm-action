@@ -34,14 +34,20 @@ inputs:
     description: "Arguments passed for the program defined by bin parameter."
     required: false
     # default: "fontem.ext"
-
-  # crudum-non-securum:
-  #   description: "Low level raw command to pass to dockerized container."
-  #   required: false
-  #   default: "vacuum"
+  # Languages ------------------------------------------------------------------
+  source_language:
+    description: "(draft) Source language"
+    required: false
+  target_language:
+    description: "(draft) Target language"
+    required: false
+  working_languages:
+    description: "(draft) Working languages"
+    required: false
+  auxiliary_languages:
+    description: "(draft) Auxiliary languages"
+    required: false
 outputs:
-  # time: # id of output
-  #   description: 'The time we greeted you'
   resultatum:
     description: "stdout of commmand"
 runs:
@@ -52,3 +58,8 @@ runs:
     - ${{ inputs.infile }}
     - ${{ inputs.outfile }}
     - ${{ inputs.args }}
+  env:
+    source_language: ${{ inputs.source_language }}
+    target_language: ${{ inputs.target_language }}
+    working_languages: ${{ inputs.working_languages }}
+    auxiliary_languages: ${{ inputs.auxiliary_languages }}

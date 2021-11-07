@@ -8,6 +8,9 @@ RUN pip install libhxl
 
 RUN pip install hdp-toolchain[hxltm]
 
+# # https://github.com/translate/translate
+# RUN pip install translate-toolkit[all]
+
 # TODO: https://stackoverflow.com/questions/43654656/dockerfile-if-else-condition-with-external-arguments
 
 # Copies your code file from your action repository to the filesystem path `/` of the container

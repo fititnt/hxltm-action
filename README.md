@@ -159,8 +159,17 @@ This documentation explains the [action.yml](action.yml) and
 [entrypoint.sh](entrypoint.sh) strategy to abstract the command line usage
 described at <https://hdp.etica.ai/hxltm/archivum/>.
 
+### Baseline inputs
+
+Baseline inputs, together with [environment variables](environment-variables),
+are enough to abstract how to use the underlying command line tools.
+The [syntactic sugar inputs](#syntactic-sugar-inputs) offer some level of
+abstraction.
+
 ---
+
 ```yaml
+      # TODO: explain this snipped a bit better
       - # name: "Some description here"
         uses: fititnt/hxltm-action@v0.3.0
         with:
@@ -169,9 +178,9 @@ described at <https://hdp.etica.ai/hxltm/archivum/>.
           infile: path/to/fontem.tm.hxl.csv
           outfile: path/to/objectivum
 ```
+
 ---
 
-### Inputs
 #### `bin`
 **Required** The executable to run.
 
@@ -219,13 +228,16 @@ Arguments passed for the program defined by [bin](#bin) parameter.
 - `-v`
 - `--sheet 7` (_Select sheet from a Excel workbook (1 is first sheet)_)
 
-#### Syntactic sugar arguments
+### Environment variables
+See <https://docs.github.com/en/actions/learn-github-actions/environment-variables>
+
+### Syntactic sugar inputs
 This section shows some [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar)
 (or intentional _syntactic saccharins_) for what could be done using other ways,
 often with [args](#args) parameter. Some of these only use English for what
 hxltm cli tools use Latin.
 
-##### `help`
+#### `help`
 
 <s>A syntax sugar to evoke [bin](#bin) program with --help and exit without
 raising error. Default `false`.</s> Just copy and paste the following.
@@ -308,7 +320,7 @@ raising error. Default `false`.
 -->
 
 
-##### `verbose`
+#### `verbose`
 > _TODO: this option is drafted, but not fully implemented/tested for
   production usage. Please use raw version [args](#args) parameter._
 
@@ -318,7 +330,16 @@ A syntax sugar to evoke [bin](#bin) program binary with -v. Default `false`.
 - `true`
 - `false`
 
-##### `dump_abstract_syntax_tree`
+
+#### `working_languages`
+- ['Working language' on Wikipedia](https://en.wikipedia.org/wiki/Working_language)
+- More context here: <https://github.com/fititnt/hxltm-action/issues/3#issuecomment-962601744>
+
+> _TODO: this option is drafted, but not fully implemented/tested for
+  production usage. Please use raw version [args](#args) parameter._
+
+
+#### `dump_abstract_syntax_tree`
 > _TODO: this option is drafted, but not fully implemented/tested for
   production usage. Please use raw version [args](#args) parameter._
 
@@ -331,7 +352,7 @@ Sames as [args](#args) with `--expertum-HXLTM-ASA {parameter}`.
 - `.asa.hxltm.yml`
 - `.asa.hxltm.json`
 
-##### `dump_abstract_syntax_tree_verbose`
+#### `dump_abstract_syntax_tree_verbose`
 > _TODO: this option is drafted, but not fully implemented/tested for
   production usage. Please use raw version [args](#args) parameter._
 

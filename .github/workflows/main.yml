@@ -25,6 +25,20 @@ jobs:
           bin: "hxltmdexml"
           args: "--help"
 
+      # - name: "csv2po --help"
+      #   uses: ./
+      #   continue-on-error: true
+      #   with:
+      #     bin: "csv2po"
+      #     args: "--help"
+
+      - name: "hxltag --help (To HXLate tabular data before use with HXL, including HXLTM)"
+        uses: ./
+        continue-on-error: true
+        with:
+          bin: "hxltag"
+          args: "--help"
+
       #### Get additional test data and put on data/ ___________________________
       - run: wget https://github.com/fititnt/hxltm-action-example/archive/refs/heads/main.zip
       - run: unzip main.zip
@@ -34,12 +48,18 @@ jobs:
       #### Quick general tests _________________________________________________
       - name: "hxltmcli --objectivum-TBX-Basim data/exemplum/hxltm-exemplum-linguam.tm.hxl.csv data/exemplum/resultatum/de-hxltm/hxltm-exemplum-linguam.tbx"
         uses: ./
-        # continue-on-error: true
+        continue-on-error: true
         with:
           bin: "hxltmcli"
           args: "--objectivum-TBX-Basim"
           infile: data/exemplum/hxltm-exemplum-linguam.tm.hxl.csv
           outfile: data/exemplum/resultatum/de-hxltm/hxltm-exemplum-linguam.tbx
+          working_languages: |
+            arb-Arab@ar
+            por-Latn@pt
+            hin-Deva@hi
+          auxiliary_languages: |
+            eng-Latn@en
 
       # - name: Hello world action step
       #   uses: ./ # Uses an action in the root directory
