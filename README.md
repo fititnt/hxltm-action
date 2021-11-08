@@ -102,13 +102,17 @@ act --privileged
     - [Syntactic sugar inputs](#syntactic-sugar-inputs)
         - [`help`](#help)
         - [`working_languages`](#working_languages)
+        - [`non_working_languages`](#non_working_languages)
         - [`auxiliary_languages`](#auxiliary_languages)
         - [`source_language`](#source_language)
         - [`target_language`](#target_language)
+        - [`export_ad_hoc_template`](#export_ad_hoc_template)
+        - [`export_data_exchange_standard`](#export_data_exchange_standard)
         - [`dump_abstract_syntax_tree`](#dump_abstract_syntax_tree)
-        - [`dump_abstract_syntax_tree_verbose`](#dump_abstract_syntax_tree_verbose)
     - [Outputs](#outputs)
         - [`resultatum`](#resultatum)
+    - [Annotations](#annotations)
+        - [Note on language options](#note-on-language-options)
 - [License](#license)
 
 <!-- /TOC -->
@@ -356,32 +360,73 @@ raising error. Default `false`.
 
 
 #### `working_languages`
-- ['Working language' on Wikipedia](https://en.wikipedia.org/wiki/Working_language)
-- More context here: <https://github.com/fititnt/hxltm-action/issues/3#issuecomment-962601744>
+- Syntactic sugar for HXLTM: `--agendum-linguam`)
+- Concept:
+  - ['Working language' on Wikipedia](https://en.wikipedia.org/wiki/Working_language)
+  - More context here: <https://github.com/fititnt/hxltm-action/issues/3#issuecomment-962601744>
 
-> _TODO: this option is drafted, but not fully implemented/tested for
-  production usage. Please use raw version [args](#args) parameter._
+List of one or more working languages
+<sup>[Note on language options](#note-on-language-options)</sup>.
+Use new lines or `,` as separator.
+
+**Parameter examples**:
+- _TODO: add example parameters for IATE and UN working languages here_
+
+#### `non_working_languages`
+
+Opposite of [working_languages](#working_languages)
+<sup>[Note on language options](#note-on-language-options)</sup>.
 
 #### `auxiliary_languages`
-- ['Auxiliary language' on Wikipedia](https://en.wikipedia.org/wiki/Auxiliary_language)
-- More context here: <https://github.com/fititnt/hxltm-action/issues/3#issuecomment-962601744>
+- Syntactic sugar for HXLTM: `--auxilium-linguam`)
+- Concept:
+  - ['Auxiliary language' on Wikipedia](https://en.wikipedia.org/wiki/Auxiliary_language)
+  - More context here: <https://github.com/fititnt/hxltm-action/issues/3#issuecomment-962601744>
 
-> _TODO: this option is drafted, but not fully implemented/tested for
-  production usage. Please use raw version [args](#args) parameter._
+List of one or more auxiliary languages (order ir important)
+<sup>[Note on language options](#note-on-language-options)</sup>.
+Use new lines or `,` as separator.
+
+**Parameter examples**:
+- _TODO: add example parameters for IATE and UN working languages here_
 
 #### `source_language`
-- ['Translation / Source and target languages' on Wikipedia](https://en.wikipedia.org/wiki/Translation#Source_and_target_languages)
-- More context here: <https://github.com/fititnt/hxltm-action/issues/3#issuecomment-962601744>
+- Syntactic sugar for HXLTM: `--fontem-linguam`)
+- Concept:
+  - ['Translation / Source and target languages' on Wikipedia](https://en.wikipedia.org/wiki/Translation#Source_and_target_languages)
+  - More context here: <https://github.com/fititnt/hxltm-action/issues/3#issuecomment-962601744>
 
-> _TODO: this option is drafted, but not fully implemented/tested for
-  production usage. Please use raw version [args](#args) parameter._
+Source language
+<sup>[Note on language options](#note-on-language-options)</sup>.
+Single item.
 
 #### `target_language`
-- ['Translation / Source and target languages' on Wikipedia](https://en.wikipedia.org/wiki/Translation#Source_and_target_languages)
-- More context here: <https://github.com/fititnt/hxltm-action/issues/3#issuecomment-962601744>
+- Syntactic sugar for HXLTM: `--objectivum-linguam`)
+- Concept:
+  - ['Translation / Source and target languages' on Wikipedia](https://en.wikipedia.org/wiki/Translation#Source_and_target_languages)
+  - More context here: <https://github.com/fititnt/hxltm-action/issues/3#issuecomment-962601744>
 
-> _TODO: this option is drafted, but not fully implemented/tested for
-  production usage. Please use raw version [args](#args) parameter._
+Target language
+<sup>[Note on language options](#note-on-language-options)</sup>.
+Single item.
+
+#### `export_ad_hoc_template`
+- Syntactic sugar for HXLTM: `--objectivum-formulam`)
+
+Export custom template (HXLTM Ad Hoc Fōrmulam).
+Path to a single file on local disk.
+
+**Parameter examples**:
+- `data/README.🗣️.md`
+
+#### `export_data_exchange_standard`
+- Syntactic sugar for HXLTM: `--objectivum-<VALUE>`)
+
+Export to data standard documented on the HXLTM ontologia.
+
+**Parameter examples**:
+- `TMX`
+- `XLIFF`
 
 <!--
 - #### `verbose`
@@ -406,19 +451,18 @@ Just copy and paste the following.
 -->
 
 #### `dump_abstract_syntax_tree`
-> _TODO: this option is drafted, but not fully implemented/tested for
-  production usage. Please use raw version [args](#args) parameter._
+- Syntactic sugar for HXLTM: `--expertum-HXLTM-ASA <VALUE>`
+- Concept:
+  - ['abstract syntax tree (AST)' on Wikipedia](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
 
-Specify a file to dump the HXLTM
-[abstract syntax tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree).
-
-Sames as [args](#args) with `--expertum-HXLTM-ASA {parameter}`.
+Specify a file to dump the _HXLTM Abstractum Syntaxim Arborem_.
 
 **Examples**:
 - `.asa.hxltm.yml`
 - `.asa.hxltm.json`
 
-#### `dump_abstract_syntax_tree_verbose`
+<!--
+- #### `dump_abstract_syntax_tree_verbose`
 > _TODO: this option is drafted, but not fully implemented/tested for
   production usage. Please use raw version [args](#args) parameter._
 
@@ -431,12 +475,21 @@ Sames as [args](#args) with `--expertum-HXLTM-ASA-verbosum --expertum-HXLTM-ASA 
 **Examples**:
 - `.asa.hxltm.yml`
 - `.asa.hxltm.json`
+-->
 
 ### Outputs
 
 #### `resultatum`
 
 > TODO: explain better the outputs.
+
+### Annotations
+
+#### Note on language options
+
+> TODO: explain here why is not possible to document the exact behavior of
+all language options, as it depends on how each data exchange standard
+implement it.
 
 ## License
 

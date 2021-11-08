@@ -35,26 +35,39 @@ inputs:
     required: false
     # default: "fontem.ext"
   # Languages ------------------------------------------------------------------
-  source_language:
-    description: "Source language"
-    required: false
-  target_language:
-    description: "Target language"
-    required: false
   working_languages:
-    description: "Working languages"
+    description: "Working languages (HXLTM `--agendum-linguam`)"
     required: false
   non_working_languages:
-    description: "Working languages (except)"
+    description: "Working languages (except) (HXLTM `--non-agendum-linguam`)"
     required: false
   auxiliary_languages:
-    description: "Auxiliary languages"
+    description: "Auxiliary languages (HXLTM `--auxilium-linguam`)"
+    required: false
+  source_language:
+    description: "Source language (HXLTM `--fontem-linguam`)"
+    required: false
+  target_language:
+    description: "Target language (HXLTM `--objectivum-linguam`)"
     required: false
   export_ad_hoc_template:
-    description: "Export custom template (HXLTM Ad Hoc Fōrmulam)"
+    description: |
+      Export custom template (HXLTM Ad Hoc Fōrmulam).
+      Path to a single file on local disk
+      (HXLTM `--objectivum-formulam`)
     required: false
   export_data_exchange_standard:
-    description: "Export to data standard documented on the HXLTM ontologia"
+    description: |
+      Export to data standard documented on the HXLTM ontologia
+      (HXLTM: `--objectivum-<VALUE>`)
+    required: false
+  dump_abstract_syntax_tree:
+    description: |
+      Specify a file to dump the HXLTM
+      (HXLTM --expertum-HXLTM-ASA)
+    required: false
+  debug:
+    description: "Enable HXLTM debug. Example value: 1"
     required: false
 outputs:
   resultatum:
@@ -68,9 +81,12 @@ runs:
     - ${{ inputs.outfile }}
     - ${{ inputs.args }}
   env:
-    source_language: ${{ inputs.source_language }}
-    target_language: ${{ inputs.target_language }}
     working_languages: ${{ inputs.working_languages }}
     non_working_languages: ${{ inputs.non_working_languages }}
     auxiliary_languages: ${{ inputs.auxiliary_languages }}
-    export_template: ${{ inputs.export_template }}
+    source_language: ${{ inputs.source_language }}
+    target_language: ${{ inputs.target_language }}
+    export_ad_hoc_template: ${{ inputs.export_ad_hoc_template }}
+    export_data_exchange_standard: ${{ inputs.export_data_exchange_standard }}
+    dump_abstract_syntax_tree: ${{ inputs.dump_abstract_syntax_tree }}
+    debug: ${{ inputs.debug }}

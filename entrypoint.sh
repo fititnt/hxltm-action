@@ -56,28 +56,25 @@ format_variables
 # exit 1
 
 echo "::group::Debug parameters"
-# compgen -c
-# sed --help
-# grep --help
-# awk --help
-echo "param 1 $1"
-echo "param 2 $2"
-echo "param 3 $3"
-echo "param 4 $4"
-echo "param @ $*"
-echo "SHELL @ $SHELL"
-echo "GITHUB_WORKSPACE $GITHUB_WORKSPACE"
-echo "WORKDIR $WORKDIR"
-# shellcheck disable=SC2154
-echo "source_language $source_language"
-# shellcheck disable=SC2154
-echo "target_language $target_language"
-echo "working_languages $working_languages"
-echo "working_languages_str $working_languages_str"
-echo "working_languages $non_working_languages"
-echo "non_working_languages_str $non_working_languages_str"
-echo "auxiliary_languages $auxiliary_languages"
+echo "param 1 [[$1]]"
+echo "param 2 [[$2]]"
+echo "param 3 [[$3]]"
+echo "param 4 [[$4]]"
+# echo "param $ * $*"
+echo "SHELL @ [[$SHELL]]"
+echo "GITHUB_WORKSPACE [[$GITHUB_WORKSPACE]]"
+echo "WORKDIR [[$WORKDIR]]"
+echo "working_languages [[$working_languages]]"
+echo "working_languages_str [[$working_languages_str]]"
+echo "non_working_languages [[$non_working_languages]]"
+echo "non_working_languages_str [[$non_working_languages_str]]"
+echo "auxiliary_languages [[$auxiliary_languages]]"
 echo "auxiliary_languages_str $auxiliary_languages_str"
+echo "source_language [[$source_language]]"
+echo "target_language [[$target_language]]"
+echo "export_ad_hoc_template [[$export_ad_hoc_template]]"
+echo "export_data_exchange_standard [[$export_data_exchange_standard]]"
+echo "dump_abstract_syntax_tree [[$dump_abstract_syntax_tree]]"
 # cat /etc/*release
 # printenv
 echo "::endgroup::"
@@ -86,14 +83,6 @@ hxltm_action_bin="$1"
 hxltm_action_infile="${2:-fontem.ext}"
 hxltm_action_outfile="${3:-objectivum.ext}"
 hxltm_action_args="$4"
-
-if [ -n "$source_language" ]; then
-    hxltm_action_args="$hxltm_action_args --fontem-linguam $source_language"
-fi
-
-if [ -n "$target_language" ]; then
-    hxltm_action_args="$hxltm_action_args --objectivum-linguam $target_language"
-fi
 
 if [ -n "$working_languages_str" ]; then
     hxltm_action_args="$hxltm_action_args --agendum-linguam $working_languages_str"
@@ -106,6 +95,15 @@ fi
 if [ -n "$auxiliary_languages_str" ]; then
     hxltm_action_args="$hxltm_action_args --auxilium-linguam $auxiliary_languages_str"
 fi
+
+if [ -n "$source_language" ]; then
+    hxltm_action_args="$hxltm_action_args --fontem-linguam $source_language"
+fi
+
+if [ -n "$target_language" ]; then
+    hxltm_action_args="$hxltm_action_args --objectivum-linguam $target_language"
+fi
+
 if [ -n "$export_ad_hoc_template" ]; then
     hxltm_action_args="$hxltm_action_args --objectivum-formulam $export_ad_hoc_template"
 fi
@@ -113,6 +111,12 @@ fi
 if [ -n "$export_data_exchange_standard" ]; then
     hxltm_action_args="$hxltm_action_args --objectivum-$export_data_exchange_standard"
 fi
+
+if [ -n "$dump_abstract_syntax_tree" ]; then
+    hxltm_action_args="$hxltm_action_args --expertum-HXLTM-ASA $dump_abstract_syntax_tree"
+fi
+
+# TODO: debug
 
 if echo "$hxltm_action_bin" | grep -q "hxl"
 then

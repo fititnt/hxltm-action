@@ -2,13 +2,18 @@
 
 ## [Unreleased]
 ### Added
-- Input parameter `source_language` (syntactic sugar for `--fontem-linguam`)
-- Input parameter `target_language` (syntactic sugar for `--objectivum-linguam`)
+- TODO
+
+## [0.4.0] - 2020-11-08
+### Added
 - Input parameter `working_languages` (syntactic sugar for `--agendum-linguam`)
 - Input parameter `non_working_languages` (syntactic sugar for `--non-agendum-linguam`)
 - Input parameter `auxiliary_languages` (syntactic sugar for `--auxilium-linguam`)
+- Input parameter `source_language` (syntactic sugar for `--fontem-linguam`)
+- Input parameter `target_language` (syntactic sugar for `--objectivum-linguam`)
 - Input parameter `export_ad_hoc_template` (syntactic sugar for `--objectivum-formulam`)
-- Input parameter `export_data_exchange_standard` (syntactic sugar for `--objectivum-<value>`)
+- Input parameter `export_data_exchange_standard` (syntactic sugar for `--objectivum-<VALUE>`)
+- Input parameter `dump_abstract_syntax_tree` (syntactic sugar for `--expertum-HXLTM-ASA`)
 
 ## [0.3.0] - 2020-11-07
 
