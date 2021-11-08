@@ -72,15 +72,48 @@ cp .github/hxltm/hxltm-exemplum-linguam.tm.hxl.csv hxltm-exemplum-linguam.tm.hxl
 
 docker run --rm -it $(docker build -q .) 'hxltmcli' 'tests/hxltm-exemplum-linguam.tm.hxl.csv' 'objectivum.tbx' '--objectivum-TBX-Basim'
 
-# Using act
+- # Using act
 act
 act --privileged
 
-#
-# Issues
-#  - https://github.com/nektos/act/issues/555
-#    - https://github.com/nektos/act/issues/410#issuecomment-732096442
+-#
+-# Issues
+-#  - https://github.com/nektos/act/issues/555
+-#    - https://github.com/nektos/act/issues/410#issuecomment-732096442
 -->
+
+---
+
+**Índice de conteúdo**
+
+<!-- TOC depthFrom:2 -->
+
+- [Example usage](#example-usage)
+    - [Quickstart](#quickstart)
+    - [Full example usages](#full-example-usages)
+        - [hxltm-action-example](#hxltm-action-example)
+- [Documentation](#documentation)
+    - [Baseline inputs](#baseline-inputs)
+        - [`bin`](#bin)
+        - [`infile`](#infile)
+        - [`outfile`](#outfile)
+        - [`args`](#args)
+    - [Environment variables](#environment-variables)
+    - [Syntactic sugar inputs](#syntactic-sugar-inputs)
+        - [`help`](#help)
+        - [`working_languages`](#working_languages)
+        - [`auxiliary_languages`](#auxiliary_languages)
+        - [`source_language`](#source_language)
+        - [`target_language`](#target_language)
+        - [`dump_abstract_syntax_tree`](#dump_abstract_syntax_tree)
+        - [`dump_abstract_syntax_tree_verbose`](#dump_abstract_syntax_tree_verbose)
+    - [Outputs](#outputs)
+        - [`resultatum`](#resultatum)
+- [License](#license)
+
+<!-- /TOC -->
+
+---
 
 
 ## Example usage
@@ -240,7 +273,9 @@ hxltm cli tools use Latin.
 #### `help`
 
 <s>A syntax sugar to evoke [bin](#bin) program with --help and exit without
-raising error. Default `false`.</s> Just copy and paste the following.
+raising error. Default `false`.</s>
+
+Just copy and paste the following.
 
 ```yaml
       - name: "hxltmcli --help"
@@ -320,17 +355,6 @@ raising error. Default `false`.
 -->
 
 
-#### `verbose`
-> _TODO: this option is drafted, but not fully implemented/tested for
-  production usage. Please use raw version [args](#args) parameter._
-
-A syntax sugar to evoke [bin](#bin) program binary with -v. Default `false`.
-
-**Parameter examples**:
-- `true`
-- `false`
-
-
 #### `working_languages`
 - ['Working language' on Wikipedia](https://en.wikipedia.org/wiki/Working_language)
 - More context here: <https://github.com/fititnt/hxltm-action/issues/3#issuecomment-962601744>
@@ -338,6 +362,48 @@ A syntax sugar to evoke [bin](#bin) program binary with -v. Default `false`.
 > _TODO: this option is drafted, but not fully implemented/tested for
   production usage. Please use raw version [args](#args) parameter._
 
+#### `auxiliary_languages`
+- ['Auxiliary language' on Wikipedia](https://en.wikipedia.org/wiki/Auxiliary_language)
+- More context here: <https://github.com/fititnt/hxltm-action/issues/3#issuecomment-962601744>
+
+> _TODO: this option is drafted, but not fully implemented/tested for
+  production usage. Please use raw version [args](#args) parameter._
+
+#### `source_language`
+- ['Translation / Source and target languages' on Wikipedia](https://en.wikipedia.org/wiki/Translation#Source_and_target_languages)
+- More context here: <https://github.com/fititnt/hxltm-action/issues/3#issuecomment-962601744>
+
+> _TODO: this option is drafted, but not fully implemented/tested for
+  production usage. Please use raw version [args](#args) parameter._
+
+#### `target_language`
+- ['Translation / Source and target languages' on Wikipedia](https://en.wikipedia.org/wiki/Translation#Source_and_target_languages)
+- More context here: <https://github.com/fititnt/hxltm-action/issues/3#issuecomment-962601744>
+
+> _TODO: this option is drafted, but not fully implemented/tested for
+  production usage. Please use raw version [args](#args) parameter._
+
+<!--
+- #### `verbose`
+<s>A syntax sugar to evoke [bin](#bin) program binary with -v. Default `false`.</s>
+
+
+Just copy and paste the following.
+
+```yaml
+      - name: "hxltmcli --venandum-insectum-est"
+        uses: fititnt/hxltm-action@v0.3.0
+        with:
+          bin: "hxltmcli"
+          args: "--venandum-insectum-est"
+
+      - name: "hxltmdexml --venandum-insectum-est"
+        uses: fititnt/hxltm-action@v0.3.0
+        with:
+          bin: "hxltmdexml"
+          args: "--venandum-insectum-est"
+```
+-->
 
 #### `dump_abstract_syntax_tree`
 > _TODO: this option is drafted, but not fully implemented/tested for
@@ -368,7 +434,7 @@ Sames as [args](#args) with `--expertum-HXLTM-ASA-verbosum --expertum-HXLTM-ASA 
 
 ### Outputs
 
-### `resultatum`
+#### `resultatum`
 
 > TODO: explain better the outputs.
 

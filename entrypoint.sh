@@ -23,12 +23,22 @@
 
 # @see https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions
 
+# str=$(printf '%s' "$str" | tr '/' 'a')
+
+# formatmultiline () {
+#     rawinput="${1//'%'/'%25'}"
+#     rawinput="${rawinput//$'\n'/'%0A'}"
+#     rawinput="${rawinput//$'\r'/'%0D'}"
+#     echo "$rawinput"
+# }
+
 echo "::group::Debug parameters"
 echo "param 1 $1"
 echo "param 2 $2"
 echo "param 3 $3"
 echo "param 4 $4"
 echo "param @ $*"
+echo "SHELL @ $SHELL"
 echo "GITHUB_WORKSPACE $GITHUB_WORKSPACE"
 echo "WORKDIR $WORKDIR"
 
@@ -38,8 +48,11 @@ echo "source_language $source_language"
 echo "target_language $target_language"
 # shellcheck disable=SC2154
 echo "working_languages $working_languages"
+# working_languages2=formatmultiline "$working_languages"
 # shellcheck disable=SC2154
-echo "working_languages $auxiliary_languages"
+# echo "working_languages $working_languages2"
+# shellcheck disable=SC2154
+echo "auxiliary_languages $auxiliary_languages"
 # cat /etc/*release
 # printenv
 echo "::endgroup::"
@@ -52,7 +65,7 @@ hxltm_action_args="$4"
 if echo "$hxltm_action_bin" | grep -q "hxl"
 then
     # TODO: simple check for spaces, and etc
-    echo "hxl okay"
+    echo "INFO: [$hxltm_action_bin] Okay"
 else
     echo "ERROR: [$hxltm_action_bin] not hxltml or libhxl-python binary"
     exit 1

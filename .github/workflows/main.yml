@@ -55,9 +55,9 @@ jobs:
           infile: data/exemplum/hxltm-exemplum-linguam.tm.hxl.csv
           outfile: data/exemplum/resultatum/de-hxltm/hxltm-exemplum-linguam.tbx
           working_languages: |
-            arb-Arab@ar
-            por-Latn@pt
-            hin-Deva@hi
+            arb-Arab@ar,
+            por-Latn@pt,
+            hin-Deva@hi,
           auxiliary_languages: |
             eng-Latn@en
 
@@ -132,15 +132,15 @@ jobs:
           infile: "tests/hxltm-exemplum-linguam.tm.hxl.csv"
           outfile: "tests/result/objectivum.utx"
 
-      - name: 'hxltmdexml --agendum-linguam por-Latn@pt tests/hxltm-exemplum-linguam.tbx tests/result/objectivum-de-tbx.tm.hxl.csv'
-        id: exemplum_4
-        continue-on-error: true
-        uses: ./
-        with:
-          bin: "hxltmdexml"
-          args: "--agendum-linguam por-Latn@pt"
-          infile: "tests/hxltm-exemplum-linguam.tm.hxl.csv"
-          outfile: "tests/result/objectivum-de-tbx.tm.hxl.csv"
+      # - name: 'hxltmdexml --agendum-linguam por-Latn@pt tests/hxltm-exemplum-linguam.tbx tests/result/objectivum-de-tbx.tm.hxl.csv'
+      #   id: exemplum_4
+      #   continue-on-error: true
+      #   uses: ./
+      #   with:
+      #     bin: "hxltmdexml"
+      #     args: "--agendum-linguam por-Latn@pt"
+      #     infile: "tests/hxltm-exemplum-linguam.tm.hxl.csv"
+      #     outfile: "tests/result/objectivum-de-tbx.tm.hxl.csv"
 
       - name: hello rexemplum_1esultatum
         run: echo "hello ${{ steps.exemplum_1.outputs.resultatum }}"
