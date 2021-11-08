@@ -2,7 +2,13 @@
 
 ## [Unreleased]
 ### Added
-- TODO
+- Input parameter `source_language` (syntactic sugar for `--fontem-linguam`)
+- Input parameter `target_language` (syntactic sugar for `--objectivum-linguam`)
+- Input parameter `working_languages` (syntactic sugar for `--agendum-linguam`)
+- Input parameter `non_working_languages` (syntactic sugar for `--non-agendum-linguam`)
+- Input parameter `auxiliary_languages` (syntactic sugar for `--auxilium-linguam`)
+- Input parameter `export_ad_hoc_template` (syntactic sugar for `--objectivum-formulam`)
+- Input parameter `export_data_exchange_standard` (syntactic sugar for `--objectivum-<value>`)
 
 ## [0.3.0] - 2020-11-07
 

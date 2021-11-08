@@ -36,19 +36,25 @@ inputs:
     # default: "fontem.ext"
   # Languages ------------------------------------------------------------------
   source_language:
-    description: "(draft) Source language"
+    description: "Source language"
     required: false
   target_language:
-    description: "(draft) Target language"
+    description: "Target language"
     required: false
   working_languages:
-    description: "(draft) Working languages"
+    description: "Working languages"
     required: false
   non_working_languages:
-    description: "(draft) Working languages (except)"
+    description: "Working languages (except)"
     required: false
   auxiliary_languages:
-    description: "(draft) Auxiliary languages"
+    description: "Auxiliary languages"
+    required: false
+  export_ad_hoc_template:
+    description: "Export custom template (HXLTM Ad Hoc Fōrmulam)"
+    required: false
+  export_data_exchange_standard:
+    description: "Export to data standard documented on the HXLTM ontologia"
     required: false
 outputs:
   resultatum:
@@ -65,4 +71,6 @@ runs:
     source_language: ${{ inputs.source_language }}
     target_language: ${{ inputs.target_language }}
     working_languages: ${{ inputs.working_languages }}
+    non_working_languages: ${{ inputs.non_working_languages }}
     auxiliary_languages: ${{ inputs.auxiliary_languages }}
+    export_template: ${{ inputs.export_template }}

@@ -61,6 +61,27 @@ jobs:
           auxiliary_languages: |
             eng-Latn@en
 
+      - name: "(1) hxltmcli --objectivum-formulam data/README.🗣️.md --objectivum-linguam eng-Latn@en data/exemplum/hxltm-exemplum-linguam.tm.hxl.csv data/README.eng-Latn.md"
+        uses: ./
+        continue-on-error: true
+        with:
+          bin: "hxltmcli"
+          args: |
+            --objectivum-formulam data/README.🗣️.md
+            --objectivum-linguam eng-Latn@en
+          infile: data/exemplum/hxltm-exemplum-linguam.tm.hxl.csv
+          outfile: data/README.eng-Latn.md
+
+      - name: "(2) hxltmcli --objectivum-formulam data/README.🗣️.md --objectivum-linguam eng-Latn@en data/exemplum/hxltm-exemplum-linguam.tm.hxl.csv data/README.eng-Latn.md"
+        uses: ./
+        continue-on-error: true
+        with:
+          bin: "hxltmcli"
+          infile: data/exemplum/hxltm-exemplum-linguam.tm.hxl.csv
+          outfile: data/README.eng-Latn.md
+          export_ad_hoc_template: data/README.🗣️.md
+          target_language: eng-Latn@en
+
       # - name: Hello world action step
       #   uses: ./ # Uses an action in the root directory
       #   id: hello

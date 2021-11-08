@@ -24,9 +24,12 @@
 # @see https://docs.github.com/en/actions/learn-github-actions/workflow-commands-for-github-actions
 
 # working_languages=$(cat <<-END
+
 # arb-Arab@ar
 # por-Latn@pt
+
 # hin-Deva@hi
+
 # END
 # )
 
@@ -36,14 +39,14 @@
 format_variables () {
     # shellcheck disable=SC2154
     if [ -n "$working_languages" ]; then
-        working_languages_str=$(echo "$working_languages" | tr '\r\n' ',' | tr '\n' ',' | tr ',,' ',')
+        working_languages_str=$(echo "$working_languages" | tr '\r\n' ',' | tr '\n' ',' | sed -e 's/,,/,/g' | sed 's/,$//' | sed 's/^,//')
     fi
     if [ -n "$non_working_languages" ]; then
-        non_working_languages_str=$(echo "$non_working_languages" | tr '\r\n' ',' | tr '\n' ',' | tr ',,' ',')
+        non_working_languages_str=$(echo "$non_working_languages" | tr '\r\n' ',' | tr '\n' ',' | sed -e 's/,,/,/g' | sed 's/,$//' | sed 's/^,//')
     fi
     # shellcheck disable=SC2154
     if [ -n "$auxiliary_languages" ]; then
-        auxiliary_languages_str=$(echo "$auxiliary_languages" | tr '\r\n' ',' | tr '\n' ',' | tr ',,' ',')
+        auxiliary_languages_str=$(echo "$auxiliary_languages" | tr '\r\n' ',' | tr '\n' ',' | sed -e 's/,,/,/g' | sed 's/,$//' | sed 's/^,//')
     fi
 }
 format_variables
@@ -103,6 +106,13 @@ fi
 if [ -n "$auxiliary_languages_str" ]; then
     hxltm_action_args="$hxltm_action_args --auxilium-linguam $auxiliary_languages_str"
 fi
+if [ -n "$export_ad_hoc_template" ]; then
+    hxltm_action_args="$hxltm_action_args --objectivum-formulam $export_ad_hoc_template"
+fi
+
+if [ -n "$export_data_exchange_standard" ]; then
+    hxltm_action_args="$hxltm_action_args --objectivum-$export_data_exchange_standard"
+fi
 
 if echo "$hxltm_action_bin" | grep -q "hxl"
 then
@@ -128,22 +138,3 @@ resultatum="$($hxltm_action_cmd)"
 echo "$resultatum"
 echo "::endgroup::"
 echo "::set-output name=resultatum::$resultatum"
-
-# echo "::endgroup::"
-# if [ "$1" != "vacuum" ]; then
-# #   echo "$2"
-# #   time="$($2)"
-# #   eval "$2"
-#   resultatum="$($1)"
-#   echo "::set-output name=resultatum::$resultatum"
-#   echo ""
-#   echo "resultatum"
-#   echo "$resultatum"
-# fi
-
-# echo "::group::My title"
-# echo "Inside group"
-# echo "::endgroup::"
-
-# time=$(date)
-# echo "::set-output name=time::$time"
