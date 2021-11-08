@@ -99,6 +99,7 @@ act --privileged
         - [`outfile`](#outfile)
         - [`args`](#args)
     - [Environment variables](#environment-variables)
+        - [Reusable defaults](#reusable-defaults)
     - [Syntactic sugar inputs](#syntactic-sugar-inputs)
         - [`help`](#help)
         - [`working_languages`](#working_languages)
@@ -112,7 +113,9 @@ act --privileged
     - [Outputs](#outputs)
         - [`resultatum`](#resultatum)
     - [Annotations](#annotations)
+        - [Note on non use of pipelines](#note-on-non-use-of-pipelines)
         - [Note on language options](#note-on-language-options)
+        - [Note on HXLTM-ASA](#note-on-hxltm-asa)
 - [License](#license)
 
 <!-- /TOC -->
@@ -154,7 +157,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: "HXLTM to TBX (TermBase eXchange)"
-        uses: actions/hxltm-action@v0.3.0
+        uses: actions/hxltm-action@v0.4.0
         with:
             bin: 'hxltmcli'
             # https://hdp.etica.ai/hxltm/archivum/#TBX-Basim
@@ -163,15 +166,15 @@ jobs:
             outfile: 'objectivum.tbx'
 
       - name: "HXLTM to TMX (Translation Memory eXchange)"
-        uses: actions/hxltm-action@v0.3.0
+        uses: actions/hxltm-action@v0.4.0
         with:
             bin: 'hxltmcli'
             args: "--objectivum-TMX"
             infile: 'fontem.tm.hxl.csv'
-            outfile: 'objectivum.tbx'
+            outfile: 'objectivum.tmx'
 
       - name: "HXLTM to UTX (Universal Terminology eXchange)"
-        uses: actions/hxltm-action@v0.3.0
+        uses: actions/hxltm-action@v0.4.0
         with:
             bin: 'hxltmcli'
             args: "--objectivum-UTX"
@@ -186,9 +189,9 @@ Examples of repositories using this action
   - <https://github.com/fititnt/hxltm-action-example/tree/main/.github/workflows>
 
 The `hxltm-action-example` is used to test the lasted version of `hxltm-action`.
-**It's recommended to specify a version (or a strict hash), like `@v0.3.0`
+**It's recommended to specify a version (or a strict hash), like `@v0.4.0`
 instead of `@main`**, so `- uses: fititnt/hxltm-action@main` would become
-`- uses: fititnt/hxltm-action@v0.3.0`.
+`- uses: fititnt/hxltm-action@v0.4.0`.
 
 ## Documentation
 
@@ -208,7 +211,7 @@ abstraction.
 ```yaml
       # TODO: explain this snipped a bit better
       - # name: "Some description here"
-        uses: fititnt/hxltm-action@v0.3.0
+        uses: fititnt/hxltm-action@v0.4.0
         with:
           bin: "hxltmcli" # hxltmcli, hxltmdexml
           args: ""  # 
@@ -221,10 +224,10 @@ abstraction.
 #### `bin`
 **Required** The executable to run.
 
-**Parameter examples**:
-- `hxltmcli` _(or `.github/hxltm/hxltmcli.py`)_ (*)
-- `hxltmdexml` _(or `.github/hxltm/hxltmdexml.py`)_ (*)
-
+> _Parameter examples_:
+> - `hxltmcli` _(or `.github/hxltm/hxltmcli.py`)_ (*)
+> - `hxltmdexml` _(or `.github/hxltm/hxltmdexml.py`)_ (*)
+>
 > <sub>(*): If necessary, a local customized fork of the reference HXLTM tools
   can be stored near where the data is processed. The suggested places are
   .github/hxltm/(file).py. This can both be useful for testing proposes or
@@ -232,41 +235,42 @@ abstraction.
   wait.</sub>
 
 #### `infile`
-The input file for the program defined by [bin](#bin) parameter.
+The input file for the program defined by [bin](#bin) parameter
+<sup>[Note on non use of pipelines](#note-on-non-use-of-pipelines)</sup>.
 Default `"fontem.ext"`.
 
-**Parameter examples**:
-- `fontem.hxl.csv`
-- `fontem.tbx`
-
-> **Note**: piping from stdin and stout, available as an efficient way by
-underlining cli tools, is not available. If you're working with gigabytes
-size datasets that would exist on GitHub Actions free disk, consider
-using actions-python and install all dependencies manually.
+> _Parameter examples_:
+> - `fontem.hxl.csv`
+> - `fontem.tbx`
 
 #### `outfile`
-The output file for the program defined by [bin](#bin) parameter.
+The output file for the program defined by [bin](#bin) parameter
+<sup>[Note on non use of pipelines](#note-on-non-use-of-pipelines)</sup>.
 Default `"objectivum.ext"`.
 
-**Parameter examples**:
-- `objectivum.tbx`
-- `objecricum.hxl.csv`
-
-> **Note**: piping from stdin and stout, available as an efficient way by
-underlining cli tools, is not available. If you're working with gigabytes
-size datasets that would exist on GitHub Actions free disk, consider
-using actions-python and install all dependencies manually.
+> _Parameter examples_:
+> - `objectivum.tbx`
+> - `objecricum.hxl.csv`
 
 #### `args`
 Arguments passed for the program defined by [bin](#bin) parameter.
 
-**Parameter examples**:
-- `--help`
-- `-v`
-- `--sheet 7` (_Select sheet from a Excel workbook (1 is first sheet)_)
+> _Parameter examples_:
+> - `--help`
+> - `-v`
+> - `--sheet 7` (_Select sheet from a Excel workbook (1 is first sheet)_)
 
 ### Environment variables
-See <https://docs.github.com/en/actions/learn-github-actions/environment-variables>
+- See <https://docs.github.com/en/actions/learn-github-actions/environment-variables>.
+
+#### Reusable defaults
+The way GitHub Actions steps works, environment variables can be both passed
+at the entire job level or at specific tasks. One implication of
+[action.yml](action.yml) and [entrypoint.sh](entrypoint.sh) is that the use of
+environment variables at job level can be used to create default values for
+potentially repetitive values, like [working_languages](#working_languages).
+
+> _TODO: test this potential implication and document it._
 
 ### Syntactic sugar inputs
 This section shows some [syntactic sugar](https://en.wikipedia.org/wiki/Syntactic_sugar)
@@ -283,13 +287,13 @@ Just copy and paste the following.
 
 ```yaml
       - name: "hxltmcli --help"
-        uses: fititnt/hxltm-action@v0.3.0
+        uses: fititnt/hxltm-action@v0.4.0
         with:
           bin: "hxltmcli"
           args: "--help"
 
       - name: "hxltmdexml --help"
-        uses: fititnt/hxltm-action@v0.3.0
+        uses: fititnt/hxltm-action@v0.4.0
         with:
           bin: "hxltmdexml"
           args: "--help"
@@ -305,19 +309,19 @@ and manually map.)
       # Bonus: HXLStandard cli tools ___________________________________________
       # @see https://github.com/HXLStandard/libhxl-python/wiki/Command-line-tools
       - name: "hxlspec --help"
-        uses: fititnt/hxltm-action@v0.3.0
+        uses: fititnt/hxltm-action@v0.4.0
         with:
           bin: "hxlspec"
           args: "--help"
 
       - name: "hxltag --help"
-        uses: fititnt/hxltm-action@v0.3.0
+        uses: fititnt/hxltm-action@v0.4.0
         with:
           bin: "hxltag"
           args: "--help"
 
       - name: "hxldedup --help"
-        uses: fititnt/hxltm-action@v0.3.0
+        uses: fititnt/hxltm-action@v0.4.0
         with:
           bin: "hxldedup"
           args: "--help"
@@ -424,9 +428,9 @@ Path to a single file on local disk.
 
 Export to data standard documented on the HXLTM ontologia.
 
-**Parameter examples**:
-- `TMX`
-- `XLIFF`
+> _Parameter examples_:
+> - `TMX`
+> - `XLIFF`
 
 <!--
 - #### `verbose`
@@ -437,13 +441,13 @@ Just copy and paste the following.
 
 ```yaml
       - name: "hxltmcli --venandum-insectum-est"
-        uses: fititnt/hxltm-action@v0.3.0
+        uses: fititnt/hxltm-action@v0.4.0
         with:
           bin: "hxltmcli"
           args: "--venandum-insectum-est"
 
       - name: "hxltmdexml --venandum-insectum-est"
-        uses: fititnt/hxltm-action@v0.3.0
+        uses: fititnt/hxltm-action@v0.4.0
         with:
           bin: "hxltmdexml"
           args: "--venandum-insectum-est"
@@ -455,11 +459,12 @@ Just copy and paste the following.
 - Concept:
   - ['abstract syntax tree (AST)' on Wikipedia](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
 
-Specify a file to dump the _HXLTM Abstractum Syntaxim Arborem_.
+Specify a file to dump the _HXLTM Abstractum Syntaxim Arborem_
+<sup>[[Note on HXLTM-ASA](#note-on-hxltm-asa)]</sup>.
 
-**Examples**:
-- `.asa.hxltm.yml`
-- `.asa.hxltm.json`
+> _Parameter examples_:
+> - `.asa.hxltm.yml`
+> - `.asa.hxltm.json`
 
 <!--
 - #### `dump_abstract_syntax_tree_verbose`
@@ -485,20 +490,50 @@ Sames as [args](#args) with `--expertum-HXLTM-ASA-verbosum --expertum-HXLTM-ASA 
 
 ### Annotations
 
-#### Note on language options
+#### Note on non use of pipelines
+- See [`infile`](#infile), [`outfile`](#outfile)
 
-> TODO: explain here why is not possible to document the exact behavior of
-all language options, as it depends on how each data exchange standard
-implement it.
+Piping from stdin and stout, available as an efficient way by
+underlining cli tools, is not available. If you're working with gigabytes
+size datasets that would exist on GitHub Actions free disk, consider
+using actions-python and install all dependencies manually.
+
+#### Note on language options
+- See [`working_languages`](#working_languages),
+  [`non_working_languages`](#non_working_languages),
+  [`auxiliary_languages`](#auxiliary_languages),
+  [`source_language`](#source_language), [`target_language`](#target_language)
+
+The main reason for the hxltm-action documentation on these options to be more
+conceptual is both because the HXLTM reference implementation tooling allows
+users specifying them and explose their value for who document custom standards
+on your ontologia even when original data exchange standards don't use it.
+
+> TODO: give even more context
+
+#### Note on HXLTM-ASA
+- See [`working_languages`](#working_languages),
+  [`non_working_languages`](#non_working_languages),
+  [`auxiliary_languages`](#auxiliary_languages),
+  [`source_language`](#source_language), [`target_language`](#target_language),
+  [`dump_abstract_syntax_tree`](#dump_abstract_syntax_tree)
+
+- See <https://hdp.etica.ai/hxltm/archivum/#HXLTM-ASA>
+
+> TODO: explain what is special about the way the reference implementation of
+  HXLTM use HXLTM-ASA.
 
 ## License
 
 [![Public Domain](https://i.creativecommons.org/p/zero/1.0/88x31.png)](UNLICENSE)
 
 To the extent possible under law, [Emerson Rocha](https://github.com/fititnt)
-has waived all copyright and related or neighboring rights to this work to
+and [non anonymous collaborators](https://github.com/fititnt/hxltm-action/graphs/contributors)
+have waived all copyright and related or neighboring rights to this work to
 [Public Domain](UNLICENSE).
 
-Optionally, you can choose to use the [BSD Zero Clause License](https://spdx.org/licenses/0BSD.html)
-instead of Public Domain unlicense. But if your project already have some
-license you could choose the same.
+Optionally, the [BSD Zero Clause License](https://spdx.org/licenses/0BSD.html)
+is also one explicit alternative to the Unlicense as an older license approved
+by the OSI:
+
+`SPDX-License-Identifier: Unlicense OR 0BSD`
