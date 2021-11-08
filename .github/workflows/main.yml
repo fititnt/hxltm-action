@@ -55,9 +55,9 @@ jobs:
           infile: data/exemplum/hxltm-exemplum-linguam.tm.hxl.csv
           outfile: data/exemplum/resultatum/de-hxltm/hxltm-exemplum-linguam.tbx
           working_languages: |
-            arb-Arab@ar,
-            por-Latn@pt,
-            hin-Deva@hi,
+            arb-Arab@ar
+            por-Latn@pt
+            hin-Deva@hi
           auxiliary_languages: |
             eng-Latn@en
 

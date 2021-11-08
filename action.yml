@@ -44,6 +44,9 @@ inputs:
   working_languages:
     description: "(draft) Working languages"
     required: false
+  non_working_languages:
+    description: "(draft) Working languages (except)"
+    required: false
   auxiliary_languages:
     description: "(draft) Auxiliary languages"
     required: false
