@@ -74,7 +74,8 @@ outputs:
     description: "stdout of commmand"
 runs:
   using: "docker"
-  image: "Dockerfile"
+  # image: "Dockerfile"
+  image: "Dockerfile-extras"
   args:
     - ${{ inputs.bin }}
     - ${{ inputs.infile }}

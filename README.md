@@ -67,6 +67,10 @@ cd /home/fititnt/Downloads/hxltm-action-backup
 docker run --rm -it $(docker build -q .)
 
 docker run --rm -it $(docker build -q .) 'hxltmcli --help'
+docker run --rm -it $(docker build -q -f Dockerfile-extras .) 'hxltmcli --help'
+
+> Delete old images
+docker rmi $(docker images -f "dangling=true" -q)
 
 cp .github/hxltm/hxltm-exemplum-linguam.tm.hxl.csv hxltm-exemplum-linguam.tm.hxl.csv
 
@@ -116,6 +120,7 @@ act --privileged
         - [Note on non use of pipelines](#note-on-non-use-of-pipelines)
         - [Note on language options](#note-on-language-options)
         - [Note on HXLTM-ASA](#note-on-hxltm-asa)
+- [To do](#to-do)
 - [License](#license)
 
 <!-- /TOC -->
@@ -373,8 +378,8 @@ List of one or more working languages
 <sup>[Note on language options](#note-on-language-options)</sup>.
 Use new lines or `,` as separator.
 
-**Parameter examples**:
-- _TODO: add example parameters for IATE and UN working languages here_
+> _Parameter examples_:
+> - _TODO: add example parameters for IATE and UN working languages here_
 
 #### `non_working_languages`
 
@@ -391,8 +396,8 @@ List of one or more auxiliary languages (order ir important)
 <sup>[Note on language options](#note-on-language-options)</sup>.
 Use new lines or `,` as separator.
 
-**Parameter examples**:
-- _TODO: add example parameters for IATE and UN working languages here_
+> _Parameter examples_:
+> - _TODO: add example parameters for IATE and UN working languages here_
 
 #### `source_language`
 - Syntactic sugar for HXLTM: `--fontem-linguam`)
@@ -420,8 +425,8 @@ Single item.
 Export custom template (HXLTM Ad Hoc Fōrmulam).
 Path to a single file on local disk.
 
-**Parameter examples**:
-- `data/README.🗣️.md`
+> _Parameter examples_:
+> - `data/README.🗣️.md`
 
 #### `export_data_exchange_standard`
 - Syntactic sugar for HXLTM: `--objectivum-<VALUE>`)
@@ -522,6 +527,16 @@ on your ontologia even when original data exchange standards don't use it.
 
 > TODO: explain what is special about the way the reference implementation of
   HXLTM use HXLTM-ASA.
+
+## To do
+
+- Even if the `@v0.*.*` already are usable (but recommended to users to specify
+  exact version), eventually release a `@v1.0.0` fo uses can use the convention
+  of GitHub actions of define `@v1` / `@v2` / `@v3` (...) as their version.
+- Potential new Action Translate Toolkit
+  - Do https://github.com/translate/translate have a GitHub Action? If not, we
+    may be interested, since they can be used to create PO files and
+    some other bilingual formats.
 
 ## License
 

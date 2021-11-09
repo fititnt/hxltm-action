@@ -118,14 +118,14 @@ fi
 
 # TODO: debug
 
-if echo "$hxltm_action_bin" | grep -q "hxl"
-then
-    # TODO: simple check for spaces, and etc
-    echo "INFO: [$hxltm_action_bin] Okay"
-else
-    echo "ERROR: [$hxltm_action_bin] not hxltml or libhxl-python binary"
-    exit 1
-fi
+# if echo "$hxltm_action_bin" | grep -q "hxl"
+# then
+#     # TODO: simple check for spaces, and etc
+#     echo "INFO: [$hxltm_action_bin] Okay"
+# else
+#     echo "ERROR: [$hxltm_action_bin] not hxltml or libhxl-python binary"
+#     exit 1
+# fi
 
 hxltm_action_cmd="$hxltm_action_bin $hxltm_action_args $hxltm_action_infile $hxltm_action_outfile"
 
