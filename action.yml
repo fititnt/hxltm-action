@@ -75,7 +75,7 @@ outputs:
 runs:
   using: "docker"
   # image: "Dockerfile"
-  image: "Dockerfile-extras"
+  image: "Dockerfile.extras"
   args:
     - ${{ inputs.bin }}
     - ${{ inputs.infile }}
