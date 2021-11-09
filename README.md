@@ -88,7 +88,7 @@ act --privileged
 
 ---
 
-**Índice de conteúdo**
+**Table of Contents**
 
 <!-- TOC depthFrom:2 -->
 
