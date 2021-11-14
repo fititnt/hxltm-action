@@ -6,7 +6,8 @@ FROM python:3.9-alpine
 
 RUN pip install libhxl
 
-RUN pip install hdp-toolchain[hxltm]
+# RUN pip install hdp-toolchain[hxltm]
+RUN pip install hxltm-eticaai
 
 # # https://github.com/translate/translate
 # RUN pip install translate-toolkit[all]

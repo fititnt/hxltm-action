@@ -99,9 +99,9 @@ act --privileged
 - [Documentation](#documentation)
     - [Baseline inputs](#baseline-inputs)
         - [`bin`](#bin)
+        - [`args`](#args)
         - [`infile`](#infile)
         - [`outfile`](#outfile)
-        - [`args`](#args)
     - [Environment variables](#environment-variables)
         - [Reusable defaults](#reusable-defaults)
     - [Syntactic sugar inputs](#syntactic-sugar-inputs)
@@ -206,7 +206,7 @@ described at <https://hdp.etica.ai/hxltm/archivum/>.
 
 ### Baseline inputs
 
-Baseline inputs, together with [environment variables](environment-variables),
+Baseline inputs, together with [Environment variables](#environment-variables),
 are enough to abstract how to use the underlying command line tools.
 The [syntactic sugar inputs](#syntactic-sugar-inputs) offer some level of
 abstraction.
@@ -239,6 +239,14 @@ abstraction.
   immediate hotfixes under urgency response where you as implementer cannot
   wait.</sub>
 
+#### `args`
+Arguments passed for the program defined by [bin](#bin) parameter.
+
+> _Parameter examples_:
+> - `--help`
+> - `-v`
+> - `--sheet 7` (_Select sheet from a Excel workbook (1 is first sheet)_)
+
 #### `infile`
 The input file for the program defined by [bin](#bin) parameter
 <sup>[Note on non use of pipelines](#note-on-non-use-of-pipelines)</sup>.
@@ -256,14 +264,6 @@ Default `"objectivum.ext"`.
 > _Parameter examples_:
 > - `objectivum.tbx`
 > - `objecricum.hxl.csv`
-
-#### `args`
-Arguments passed for the program defined by [bin](#bin) parameter.
-
-> _Parameter examples_:
-> - `--help`
-> - `-v`
-> - `--sheet 7` (_Select sheet from a Excel workbook (1 is first sheet)_)
 
 ### Environment variables
 - See <https://docs.github.com/en/actions/learn-github-actions/environment-variables>.

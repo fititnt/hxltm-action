@@ -4,6 +4,10 @@
 ### Added
 - TODO
 
+## [0.5.0] - 2020-11-14
+### Changed
+- Use dedicated `pip install hxltm-eticaai` (instead of `pip install hdp-toolchain[hxltm]`)
+
 ## [0.4.0] - 2020-11-08
 ### Added
 - Input parameter `working_languages` (syntactic sugar for `--agendum-linguam`)
